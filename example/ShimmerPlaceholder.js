@@ -16,7 +16,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
     super(props)
     this.state = {
       positionVerticalLine: new Animated.Value(-this.WIDTH_LINE),
-      animating: this.props.animating ? this.props.animating : true
+      isDisplayChildComponent: this.props.isDisplayChildComponent ? this.props.isDisplayChildComponent : false
     }
     this.WIDTH = this.props.width || 200
     this.HEIGHT = this.props.height || 15
@@ -52,22 +52,22 @@ export default class ShimmerPlaceHolder extends PureComponent {
       toValue: this.end, // Target
       duration: this.props.duration, // Configuration
     }).start((event) => {
-      if (this.state.animating) {
+      if (!this.state.isDisplayChildComponent) {
         this.runAnimatedAuto()
       }
     })
   }
 
-  componentWillReceiveProps({animating}){
-    if(animating!=undefined&&animating!=this.state.animating){
+  componentWillReceiveProps({isDisplayChildComponent}){
+    if(isDisplayChildComponent!=undefined&&isDisplayChildComponent!=this.state.isDisplayChildComponent){
       this.setState({
-        animating: animating
+        isDisplayChildComponent: isDisplayChildComponent
       })
     }
   }
   renderShimmerLoading() {
     const {colorShimmer} = this
-    if (this.state.animating != false) return (
+    if (!this.state.isDisplayChildComponent) return (
       <Animated.View
         style={[
           styles.lineComponent, {
@@ -92,10 +92,10 @@ export default class ShimmerPlaceHolder extends PureComponent {
     )
   }
   render () {
-    const {animating} = this.state;
+    const {isDisplayChildComponent} = this.state;
     return (
       <View>
-        <View style={animating?[
+        <View style={!isDisplayChildComponent?[
           {
             height: this.HEIGHT,
             width: this.WIDTH
@@ -105,7 +105,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
         ]:[]}>
 
           {this.renderShimmerLoading()}
-          <View style={animating?{width:0,height:0}:{}}>
+          <View style={!isDisplayChildComponent?{width:0,height:0}:{}}>
             {this.props.children}
           </View>
         </View>

@@ -91,12 +91,12 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 
 | Prop | Description | Default |
 |---|---|---|
-|**`animating`**|With of row|false|
+|**`isDisplayChildComponent`**| Display child components |false|
 |**`style`**|Styles applied to the container of Shimmer Placeholder|`{backgroundColor: '#ebebeb',overflow: 'hidden'}`|
 |**`width`**|With of row|200|
 |**`height`**|height of row|15|
 |**`widthLine`**|width of shimmer|90|
-|**`reverse`**|Reverse |`true`|
+|**`reverse`**|Reverse direction |`true`|
 |**`autoRun`**|Run shimmer animated at begin |`true`|
 |**`colorShimmer`**|Color of the shimmer. |*Inherited*|
 
