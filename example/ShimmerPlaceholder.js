@@ -33,54 +33,31 @@ export default class ShimmerPlaceHolder extends PureComponent {
     }
 
   }
-  componentWillMount () {}
   componentDidMount () {
-    // this.moveVerticalLineAuto()
-    // this.refreshIntervalId=setInterval(()=>{
-    //   beginLinePosition=this.state.beginLinePosition>0.8?0:(this.state.beginLinePosition+0.08)
-    //   this.setState({
-    //     beginLinePosition
-    //   })
-    // },100)
     if (this.props.autoRun== true){
-      this.moveVerticalLineAuto()
+      this.runAnimatedAuto()
     }
   }
-  moveVerticalLine = () =>  {
+  runAnimated = () =>  {
     this.positionVerticalLine.setValue(this.begin)
     return Animated.timing(this.positionVerticalLine, { // The value to drive
       toValue: this.end, // Target
       duration: this.props.duration, // Configuration
-      // easing: Easing.linear,
-      // isInteraction: false
-      // velocity: 100,
-      // tension: -4,
-      // friction: 1,
     })
   }
-  moveVerticalLineAuto(){
+  runAnimatedAuto(){
     this.positionVerticalLine.setValue(this.begin)
     Animated.timing(this.positionVerticalLine, { // The value to drive
       toValue: this.end, // Target
       duration: this.props.duration, // Configuration
-      // easing: Easing.linear,
-      // delay: 200,
-      // isInteraction: false
-      // velocity: 100,
-      // tension: -4,
-      // friction: 1,
     }).start((event) => {
       if (!this.state.animating) {
-        this.moveVerticalLineAuto()
+        this.runAnimatedAuto()
       }
     })
   }
-  componentWillUnmount () {
-    // clearInterval(this.refreshIntervalId);
 
-  }
   componentWillReceiveProps({animating}){
-    // console.log(">>>Props",props);
     if(animating!=this.state.animating){
       this.setState({
         animating:animating
@@ -88,13 +65,11 @@ export default class ShimmerPlaceHolder extends PureComponent {
     }
   }
   renderShimmerLoading1() {
-    // console.log(">>>.",this.state.animating,(this.state.animating != true));
     if (this.state.animating != true) return (
       <View style={{backgroundColor :'red',width:200,height:200}}/>
     )
   }
   renderShimmerLoading() {
-    // console.log(">>>.",this.state.animating,(this.state.animating != true));
     if (this.state.animating != true) return (
       <Animated.View
         style={[
@@ -120,18 +95,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
     )
   }
   render () {
-
-    // const childrenWithProps = React.Children.map(this.props.children,
-    //  (child) => React.cloneElement(child, {
-    //   //  doSomething: this.doSomething
-    //  })
-    // )
     const {animating} = this.state;
-    // if (animating === true) return (
-    //   <View>
-    //     {this.props.children}
-    //   </View>
-    // )
     return (
       <View>
         <View style={!animating?[
@@ -149,32 +113,21 @@ export default class ShimmerPlaceHolder extends PureComponent {
             {this.props.children}
           </View>
         </View>
-
       </View>
-
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-
     backgroundColor: '#ebebeb',
     overflow: 'hidden'
-    // position:'absolute',
   },
   lineComponent: {
     flex: 1,
     position: 'relative',
-    // zIndex:3
   },
   linearGradient: {
     flex: 1,
-    // width: 80,
-    // zIndex: 4,
-    // paddingLeft: 15,
-    // paddingRight: 15,
-    // borderRadius: 5
   }
 });

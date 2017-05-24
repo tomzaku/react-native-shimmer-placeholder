@@ -44,8 +44,8 @@ export default class Shimmer extends Component {
     if (Array.isArray(this.loadingAnimated)&&this.loadingAnimated.length>0) {
       Animated.parallel(
         this.loadingAnimated.map(animate=> {
-          if (animate&&animate.moveVerticalLine) {
-            return animate.moveVerticalLine()
+          if (animate&&animate.runAnimated) {
+            return animate.runAnimated()
           }
           return null
         }),
@@ -60,11 +60,11 @@ export default class Shimmer extends Component {
   runAvatarReverseAnimated() {
     if (Array.isArray(this.animatedAvatarReverseLoading)&&this.animatedAvatarReverseLoading.length>0) {
       Animated.sequence([
-        this.animatedAvatarReverseLoading[0].moveVerticalLine(),
+        this.animatedAvatarReverseLoading[0].runAnimated(),
         Animated.parallel(
           this.animatedAvatarReverseLoading.slice(1,this.animatedAvatarReverseLoading.length-1).map(animate=> {
-            if (animate&&animate.moveVerticalLine) {
-              return animate.moveVerticalLine()
+            if (animate&&animate.runAnimated) {
+              return animate.runAnimated()
             }
             return null
           }),
@@ -72,7 +72,7 @@ export default class Shimmer extends Component {
             stopTogether: false
           }
         ),
-        this.animatedAvatarReverseLoading[this.animatedAvatarReverseLoading.length - 1].moveVerticalLine()
+        this.animatedAvatarReverseLoading[this.animatedAvatarReverseLoading.length - 1].runAnimated()
       ]
     ).start(() => {
           this.runAvatarReverseAnimated()
@@ -83,10 +83,10 @@ export default class Shimmer extends Component {
     if (Array.isArray(this.bigImageAndSomeRowsAnimated)&&this.bigImageAndSomeRowsAnimated.length>0) {
       Animated.parallel(
           [
-            this.bigImageAndSomeRowsAnimated[0].moveVerticalLine(),
+            this.bigImageAndSomeRowsAnimated[0].runAnimated(),
           ...this.bigImageAndSomeRowsAnimated.slice(1).map(animate => {
-            if (animate&&animate.moveVerticalLine) {
-              return animate.moveVerticalLine()
+            if (animate&&animate.runAnimated) {
+              return animate.runAnimated()
             }
             return null
           }),
@@ -101,11 +101,11 @@ export default class Shimmer extends Component {
   runAvatarAnimated() {
     if (Array.isArray(this.avatarLoadingAnimated)&&this.avatarLoadingAnimated.length>0) {
       Animated.sequence([
-        this.avatarLoadingAnimated[0].moveVerticalLine(),
+        this.avatarLoadingAnimated[0].runAnimated(),
         Animated.parallel(
           this.avatarLoadingAnimated.slice(1).map(animate=> {
-            if (animate&&animate.moveVerticalLine) {
-              return animate.moveVerticalLine()
+            if (animate&&animate.runAnimated) {
+              return animate.runAnimated()
             }
             return null
           }),
@@ -209,7 +209,7 @@ export default class Shimmer extends Component {
           >
             <Image
               style= {{width: 175, height: 175}}
-              source= {{uri: 'https://unsplash.it/324/324'}}
+              source= {{uri: 'https://unsplash.it/300/300'}}
               onLoad = {()=> { this.setState({imageIsFetched: true}) }}
 
            />

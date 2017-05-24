@@ -24,6 +24,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
     this.refreshIntervalId = null
     this.positionVerticalLine = new Animated.Value(-this.WIDTH_LINE)
     this.duration = this.props.duration || 300
+    this.colorShimmer = this.props.colorShimmer || '#e2e2e2'
     if (this.props.reverse === true ) {
       this.begin = this.WIDTH
       this.end = -this.WIDTH_LINE
@@ -35,24 +36,24 @@ export default class ShimmerPlaceHolder extends PureComponent {
   }
   componentDidMount () {
     if (this.props.autoRun== true){
-      this.moveVerticalLineAuto()
+      this.runAnimatedAuto()
     }
   }
-  moveVerticalLine = () =>  {
+  runAnimated = () =>  {
     this.positionVerticalLine.setValue(this.begin)
     return Animated.timing(this.positionVerticalLine, { // The value to drive
       toValue: this.end, // Target
       duration: this.props.duration, // Configuration
     })
   }
-  moveVerticalLineAuto(){
+  runAnimatedAuto(){
     this.positionVerticalLine.setValue(this.begin)
     Animated.timing(this.positionVerticalLine, { // The value to drive
       toValue: this.end, // Target
       duration: this.props.duration, // Configuration
     }).start((event) => {
       if (!this.state.animating) {
-        this.moveVerticalLineAuto()
+        this.runAnimatedAuto()
       }
     })
   }
@@ -64,12 +65,8 @@ export default class ShimmerPlaceHolder extends PureComponent {
       })
     }
   }
-  renderShimmerLoading1() {
-    if (this.state.animating != true) return (
-      <View style={{backgroundColor :'red',width:200,height:200}}/>
-    )
-  }
   renderShimmerLoading() {
+    const {colorShimmer} = this
     if (this.state.animating != true) return (
       <Animated.View
         style={[
@@ -79,7 +76,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
           }
       ]}>
         <LinearGradient
-          colors={['#ebebeb', '#e2e2e2', '#ebebeb']}
+          colors={['#ebebeb', colorShimmer, '#ebebeb']}
           style={styles.linearGradient}
           start={{
             x: 0,
