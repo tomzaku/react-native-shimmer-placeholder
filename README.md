@@ -5,8 +5,7 @@
 Placeholder for both IOS and Android
 </h5>
 <p align="center">
-
-![Example](./example.gif)
+<img src="./example.gif">
 </p>
 
 ## Get Started
