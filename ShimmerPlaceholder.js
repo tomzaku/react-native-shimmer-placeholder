@@ -16,7 +16,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
     super(props)
     this.state = {
       positionVerticalLine: new Animated.Value(-this.WIDTH_LINE),
-      hideAnimated: this.props.hideAnimated || false
+      animating: this.props.animating || false
     }
     this.WIDTH = this.props.width || 200
     this.HEIGHT = this.props.height || 15
@@ -42,6 +42,9 @@ export default class ShimmerPlaceHolder extends PureComponent {
     //     beginLinePosition
     //   })
     // },100)
+    if (this.props.autoRun== true){
+      this.moveVerticalLineAuto()
+    }
   }
   moveVerticalLine = () =>  {
     this.positionVerticalLine.setValue(this.begin)
@@ -67,7 +70,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
       // tension: -4,
       // friction: 1,
     }).start((event) => {
-      if (!this.state.hideAnimated) {
+      if (!this.state.animating) {
         this.moveVerticalLineAuto()
       }
     })
@@ -76,23 +79,23 @@ export default class ShimmerPlaceHolder extends PureComponent {
     // clearInterval(this.refreshIntervalId);
 
   }
-  componentWillReceiveProps({hideAnimated}){
+  componentWillReceiveProps({animating}){
     // console.log(">>>Props",props);
-    if(hideAnimated!=this.state.hideAnimated){
+    if(animating!=this.state.animating){
       this.setState({
-        hideAnimated:hideAnimated
+        animating:animating
       })
     }
   }
   renderShimmerLoading1() {
-    // console.log(">>>.",this.state.hideAnimated,(this.state.hideAnimated != true));
-    if (this.state.hideAnimated != true) return (
+    // console.log(">>>.",this.state.animating,(this.state.animating != true));
+    if (this.state.animating != true) return (
       <View style={{backgroundColor :'red',width:200,height:200}}/>
     )
   }
   renderShimmerLoading() {
-    // console.log(">>>.",this.state.hideAnimated,(this.state.hideAnimated != true));
-    if (this.state.hideAnimated != true) return (
+    // console.log(">>>.",this.state.animating,(this.state.animating != true));
+    if (this.state.animating != true) return (
       <Animated.View
         style={[
           styles.lineComponent, {
@@ -123,15 +126,15 @@ export default class ShimmerPlaceHolder extends PureComponent {
     //   //  doSomething: this.doSomething
     //  })
     // )
-    const {hideAnimated} = this.state;
-    // if (hideAnimated === true) return (
+    const {animating} = this.state;
+    // if (animating === true) return (
     //   <View>
     //     {this.props.children}
     //   </View>
     // )
     return (
       <View>
-        <View style={!hideAnimated?[
+        <View style={!animating?[
           {
             height: this.HEIGHT,
             width: this.WIDTH
@@ -142,7 +145,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
         ]}>
 
           {this.renderShimmerLoading()}
-          <View style={!hideAnimated?{width:0,height:0}:{}}>
+          <View style={!animating?{width:0,height:0}:{}}>
             {this.props.children}
           </View>
         </View>

@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { PureComponent,Component } from 'react';
-import { View, Text, StyleSheet, Animated, Image } from 'react-native';
+import { View, Text, StyleSheet, Animated, Image, ScrollView } from 'react-native';
 
 import ShimmerPlaceHolder from './ShimmerPlaceholder.js'
 
@@ -41,10 +41,28 @@ export default class Shimmer extends Component {
   }
 
   runAnimated() {
-    // try{
-      if (Array.isArray(this.loadingAnimated)&&this.loadingAnimated.length>0) {
+    if (Array.isArray(this.loadingAnimated)&&this.loadingAnimated.length>0) {
+      Animated.parallel(
+        this.loadingAnimated.map(animate=> {
+          if (animate&&animate.moveVerticalLine) {
+            return animate.moveVerticalLine()
+          }
+          return null
+        }),
+        {
+          stopTogether: false
+        }
+      ).start(() => {
+          this.runAnimated()
+      })
+    }
+  }
+  runAvatarReverseAnimated() {
+    if (Array.isArray(this.animatedAvatarReverseLoading)&&this.animatedAvatarReverseLoading.length>0) {
+      Animated.sequence([
+        this.animatedAvatarReverseLoading[0].moveVerticalLine(),
         Animated.parallel(
-          this.loadingAnimated.map(animate=> {
+          this.animatedAvatarReverseLoading.slice(1,this.animatedAvatarReverseLoading.length-1).map(animate=> {
             if (animate&&animate.moveVerticalLine) {
               return animate.moveVerticalLine()
             }
@@ -53,44 +71,13 @@ export default class Shimmer extends Component {
           {
             stopTogether: false
           }
-        ).start(() => {
-          // if (!this.state.imageIsFetched) {
-            this.runAnimated()
-          // }
-        })
-      }
-    // }catch(err){
-    //   alert(err.message)
-    // }
-  }
-  runAvatarReverseAnimated() {
-    // try{
-      if (Array.isArray(this.animatedAvatarReverseLoading)&&this.animatedAvatarReverseLoading.length>0) {
-        Animated.sequence([
-          this.animatedAvatarReverseLoading[0].moveVerticalLine(),
-          Animated.parallel(
-            this.animatedAvatarReverseLoading.slice(1,this.animatedAvatarReverseLoading.length-1).map(animate=> {
-              if (animate&&animate.moveVerticalLine) {
-                return animate.moveVerticalLine()
-              }
-              return null
-            }),
-            {
-              stopTogether: false
-            }
-          ),
-          this.animatedAvatarReverseLoading[this.animatedAvatarReverseLoading.length - 1].moveVerticalLine()
-        ]
-      ).start(() => {
-          // if (!this.state.imageIsFetched) {
-            this.runAvatarReverseAnimated()
-          // }
-        })
-
-      }
-    // }catch(err){
-    //   alert(err.message)
-    // }
+        ),
+        this.animatedAvatarReverseLoading[this.animatedAvatarReverseLoading.length - 1].moveVerticalLine()
+      ]
+    ).start(() => {
+          this.runAvatarReverseAnimated()
+      })
+    }
   }
   runBigAvatarAndSomeRowsAnimated() {
     if (Array.isArray(this.bigImageAndSomeRowsAnimated)&&this.bigImageAndSomeRowsAnimated.length>0) {
@@ -107,59 +94,50 @@ export default class Shimmer extends Component {
         {
           stopTogether: false
         }).start(() => {
-        // if (!this.state.isFetched) {
           this.runBigAvatarAndSomeRowsAnimated()
-        // }
       })
-
     }
   }
   runAvatarAnimated() {
-    // try{
-      if (Array.isArray(this.avatarLoadingAnimated)&&this.avatarLoadingAnimated.length>0) {
-        Animated.sequence([
-          this.avatarLoadingAnimated[0].moveVerticalLine(),
-          Animated.parallel(
-            this.avatarLoadingAnimated.slice(1).map(animate=> {
-              if (animate&&animate.moveVerticalLine) {
-                return animate.moveVerticalLine()
-              }
-              return null
-            }),
-            {
-              stopTogether: false
+    if (Array.isArray(this.avatarLoadingAnimated)&&this.avatarLoadingAnimated.length>0) {
+      Animated.sequence([
+        this.avatarLoadingAnimated[0].moveVerticalLine(),
+        Animated.parallel(
+          this.avatarLoadingAnimated.slice(1).map(animate=> {
+            if (animate&&animate.moveVerticalLine) {
+              return animate.moveVerticalLine()
             }
-          )]
-        ).start(() => {
-          // if (!this.state.imageIsFetched) {
-            this.runAvatarAnimated()
-          // }
-        })
-
-      }
-    // }catch(err){
-    //   alert(err.message)
-    // }
+            return null
+          }),
+          {
+            stopTogether: false
+          }
+        )]
+      ).start(() => {
+          this.runAvatarAnimated()
+      })
+    }
   }
-
-  render() {
-     const {isfetched, imageIsFetched} = this.state
-    return (
-      <View style={styles.container}>
+  _renderRows(loadingAnimated,number,uniqueKey){
+    shimmerRows=[]
+    for(let index=0;index<number;index++ ){
+      shimmerRows.push(
         <ShimmerPlaceHolder
-            ref = {(ref) => this.loadingAnimated.push(ref)}
+            key={`loading-${index}-${uniqueKey}`}
+            ref = {(ref) => loadingAnimated.push(ref)}
+            style={{marginBottom: 7}}
         />
-        <ShimmerPlaceHolder
-            ref = {(ref) => this.loadingAnimated.push(ref)}
-            style={{marginTop: 7}}
-        />
-        <ShimmerPlaceHolder
-            ref = {(ref) => this.loadingAnimated.push(ref)}
-            style={{marginTop: 7}}
-        />
-
-        <Line style={{marginTop: 7, marginBottom: 7, paddingLeft: 16}}/>
-
+      )
+    }
+    return(
+      <View>
+        {shimmerRows}
+      </View>
+    )
+  }
+  _renderImageAndRows(){
+    return(
+      <View>
         <View style={{flexDirection:'row'}}>
           <ShimmerPlaceHolder
               ref = {(ref) => this.avatarLoadingAnimated.push(ref)}
@@ -167,76 +145,67 @@ export default class Shimmer extends Component {
               height = {60}
               style ={{marginRight: 16}}
           />
-          <View >
-            <ShimmerPlaceHolder
-                ref = {(ref) => this.avatarLoadingAnimated.push(ref)}
-            />
-            <ShimmerPlaceHolder
-                ref = {(ref) => this.avatarLoadingAnimated.push(ref)}
-                style={{marginTop: 7}}
-            />
-            <ShimmerPlaceHolder
-                ref = {(ref) => this.avatarLoadingAnimated.push(ref)}
-                style={{marginTop: 7, marginBottom: 7}}
-            />
-          </View>
+          {this._renderRows(this.avatarLoadingAnimated,3,'image-row')}
         </View>
+      </View>
+    )
+  }
+  _renderReverseAnimated(animatedAvatarReverseLoading,number){
+    shimmerRows=[]
+    for(let index=0;index<number;index++ ){
+      shimmerRows.push(
+        <ShimmerPlaceHolder
+          key = {`reverse-${index}`}
+          ref = {(ref) => animatedAvatarReverseLoading.push(ref)}
+          style={{marginBottom: 7, marginLeft: 16}}
+          width = {130}
+          height = {9}
+          reverse
+        />
+      )
+    }
+    avatar=(    <ShimmerPlaceHolder
+            ref = {(ref) => animatedAvatarReverseLoading.push(ref)}
+            width = {60}
+            height = {60}
+            style ={{marginLeft: 16}}
+            reverse
+        />)
+    return(
+      <View style={{flexDirection:'row-reverse'}}>
+        {avatar}
+        <View>
+          {shimmerRows}
+        </View>
+        {avatar}
+      </View>
+    )
+  }
+  render() {
+    const {isfetched, imageIsFetched} = this.state
+    return (
+      <ScrollView style={styles.container}>
+        <Text style={{marginBottom: 7}}> Simple </Text>
+        <ShimmerPlaceHolder autoRun={true} />
         <Line style={{marginTop: 7, marginBottom: 7, paddingLeft: 16}}/>
-
-        <View style={{flexDirection:'row-reverse'}}>
-          <ShimmerPlaceHolder
-              ref = {(ref) => this.animatedAvatarReverseLoading.push(ref)}
-              width = {60}
-              height = {60}
-              style ={{marginLeft: 16}}
-              reverse
-          />
-          <View>
-            <ShimmerPlaceHolder
-                ref = {(ref) => this.animatedAvatarReverseLoading.push(ref)}
-                width = {130}
-                height = {9}
-                reverse
-            />
-            <ShimmerPlaceHolder
-                ref = {(ref) => this.animatedAvatarReverseLoading.push(ref)}
-                style={{marginTop: 7}}
-                width = {130}
-                height = {9}
-                reverse
-            />
-            <ShimmerPlaceHolder
-                ref = {(ref) => this.animatedAvatarReverseLoading.push(ref)}
-                style={{marginTop: 7}}
-                width = {130}
-                height = {9}
-                reverse
-            />
-            <ShimmerPlaceHolder
-                ref = {(ref) => this.animatedAvatarReverseLoading.push(ref)}
-                style={{marginTop: 7}}
-                width = {130}
-                height = {9}
-                reverse
-            />
-          </View>
-          <ShimmerPlaceHolder
-              ref = {(ref) => this.animatedAvatarReverseLoading.push(ref)}
-              width = {60}
-              height = {60}
-              style ={{marginRight: 16}}
-              reverse
-          />
-        </View>
+        <Text style={{marginBottom: 7}}> 3 Rows </Text>
+        {this._renderRows(this.loadingAnimated,3,'three-rows')}
+        <Line style={{marginTop: 7, marginBottom: 7, paddingLeft: 16}}/>
+        <Text style={{marginBottom: 7}}> Image and Rows </Text>
+        {this._renderImageAndRows()}
+        <Line style={{marginTop: 7, marginBottom: 7, paddingLeft: 16}}/>
+        <Text style={{marginBottom: 7}}>Reverse Animated</Text>
+        {this._renderReverseAnimated(this.animatedAvatarReverseLoading,4)}
 
         <Line style={{marginTop: 7, marginBottom: 7, paddingLeft: 16}}/>
+        <Text style={{marginBottom: 7}}>Fetching image and text</Text>
 
         <View  style={{alignItems:'center'}} >
           <ShimmerPlaceHolder
               ref = {(ref) => this.bigImageAndSomeRowsAnimated.push(ref)}
               width = {175}
               height = {175}
-              hideAnimated = {imageIsFetched}
+              animating = {imageIsFetched}
           >
             <Image
               style= {{width: 175, height: 175}}
@@ -251,40 +220,22 @@ export default class Shimmer extends Component {
                 style={{marginTop: 7}}
                 width = {350}
                 height = {9}
-                hideAnimated = {isfetched}
+                animating = {isfetched}
             >
-              <Text style={{marginTop: 3}}>Lorem Ipsum is simply dummy text of the printing </Text>
+              <Text style={{marginTop: 3}}>Lorem Ipsum is simply dummy text of the printing</Text>
             </ShimmerPlaceHolder>
             <ShimmerPlaceHolder
                 ref = {(ref) => this.bigImageAndSomeRowsAnimated.push(ref)}
                 style={{marginTop: 7}}
                 width = {350}
                 height = {9}
-                hideAnimated = {isfetched}
-            >
-              <Text style={{marginTop: 3}}>Lorem Ipsum is simply dummy text of the printing </Text>
-            </ShimmerPlaceHolder>
-            <ShimmerPlaceHolder
-                ref = {(ref) => this.bigImageAndSomeRowsAnimated.push(ref)}
-                style={{marginTop: 7}}
-                width = {350}
-                height = {9}
-                hideAnimated = {isfetched}
-            >
-              <Text style={{marginTop: 3}}>Lorem Ipsum is simply dummy text of the printing </Text>
-            </ShimmerPlaceHolder>
-            <ShimmerPlaceHolder
-                ref = {(ref) => this.bigImageAndSomeRowsAnimated.push(ref)}
-                style={{marginTop: 7}}
-                width = {350}
-                height = {9}
-                hideAnimated = {isfetched}
+                animating = {isfetched}
             >
               <Text style={{marginTop: 3}}>Lorem Ipsum is simply dummy text of the printing </Text>
             </ShimmerPlaceHolder>
           </View>
         </View>
-      </View>
+      </ScrollView>
     )
   }
 }
