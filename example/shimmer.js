@@ -205,7 +205,7 @@ export default class Shimmer extends Component {
               ref = {(ref) => this.bigImageAndSomeRowsAnimated.push(ref)}
               width = {175}
               height = {175}
-              animating = {imageIsFetched}
+              animating = {!imageIsFetched}
           >
             <Image
               style= {{width: 175, height: 175}}
@@ -220,7 +220,7 @@ export default class Shimmer extends Component {
                 style={{marginTop: 7}}
                 width = {350}
                 height = {9}
-                animating = {isfetched}
+                animating = {!isfetched}
             >
               <Text style={{marginTop: 3}}>Lorem Ipsum is simply dummy text of the printing</Text>
             </ShimmerPlaceHolder>
@@ -229,7 +229,7 @@ export default class Shimmer extends Component {
                 style={{marginTop: 7}}
                 width = {350}
                 height = {9}
-                animating = {isfetched}
+                animating = {!isfetched}
             >
               <Text style={{marginTop: 3}}>Lorem Ipsum is simply dummy text of the printing </Text>
             </ShimmerPlaceHolder>

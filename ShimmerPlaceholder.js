@@ -16,7 +16,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
     super(props)
     this.state = {
       positionVerticalLine: new Animated.Value(-this.WIDTH_LINE),
-      animating: this.props.animating || false
+      animating: this.props.animating || true
     }
     this.WIDTH = this.props.width || 200
     this.HEIGHT = this.props.height || 15
@@ -52,7 +52,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
       toValue: this.end, // Target
       duration: this.props.duration, // Configuration
     }).start((event) => {
-      if (!this.state.animating) {
+      if (this.state.animating) {
         this.runAnimatedAuto()
       }
     })
@@ -67,7 +67,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
   }
   renderShimmerLoading() {
     const {colorShimmer} = this
-    if (this.state.animating != true) return (
+    if (this.state.animating != false) return (
       <Animated.View
         style={[
           styles.lineComponent, {

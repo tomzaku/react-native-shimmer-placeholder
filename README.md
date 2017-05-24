@@ -92,6 +92,7 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 
 | Prop | Description | Default |
 |---|---|---|
+|**`animating`**|With of row|false|
 |**`style`**|Styles applied to the container of Shimmer Placeholder|`{backgroundColor: '#ebebeb',overflow: 'hidden'}`|
 |**`width`**|With of row|200|
 |**`height`**|height of row|15|
@@ -104,3 +105,7 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 | Method | Description |
 |---|---|
 |**`runAnimated`**|Run shimmer animated right now |
+
+### Contribute
+Contact me if something wrong
+Give me a star if it's helpful

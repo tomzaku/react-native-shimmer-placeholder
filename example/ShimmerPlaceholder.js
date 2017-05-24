@@ -16,7 +16,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
     super(props)
     this.state = {
       positionVerticalLine: new Animated.Value(-this.WIDTH_LINE),
-      animating: this.props.animating || false
+      animating: this.props.animating ? this.props.animating : true
     }
     this.WIDTH = this.props.width || 200
     this.HEIGHT = this.props.height || 15
@@ -24,6 +24,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
     this.refreshIntervalId = null
     this.positionVerticalLine = new Animated.Value(-this.WIDTH_LINE)
     this.duration = this.props.duration || 300
+    this.colorShimmer = this.props.colorShimmer || '#e2e2e2'
     if (this.props.reverse === true ) {
       this.begin = this.WIDTH
       this.end = -this.WIDTH_LINE
@@ -51,26 +52,22 @@ export default class ShimmerPlaceHolder extends PureComponent {
       toValue: this.end, // Target
       duration: this.props.duration, // Configuration
     }).start((event) => {
-      if (!this.state.animating) {
+      if (this.state.animating) {
         this.runAnimatedAuto()
       }
     })
   }
 
   componentWillReceiveProps({animating}){
-    if(animating!=this.state.animating){
+    if(animating!=undefined&&animating!=this.state.animating){
       this.setState({
-        animating:animating
+        animating: animating
       })
     }
   }
-  renderShimmerLoading1() {
-    if (this.state.animating != true) return (
-      <View style={{backgroundColor :'red',width:200,height:200}}/>
-    )
-  }
   renderShimmerLoading() {
-    if (this.state.animating != true) return (
+    const {colorShimmer} = this
+    if (this.state.animating != false) return (
       <Animated.View
         style={[
           styles.lineComponent, {
@@ -79,7 +76,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
           }
       ]}>
         <LinearGradient
-          colors={['#ebebeb', '#e2e2e2', '#ebebeb']}
+          colors={['#ebebeb', colorShimmer, '#ebebeb']}
           style={styles.linearGradient}
           start={{
             x: 0,
@@ -98,18 +95,17 @@ export default class ShimmerPlaceHolder extends PureComponent {
     const {animating} = this.state;
     return (
       <View>
-        <View style={!animating?[
+        <View style={animating?[
           {
             height: this.HEIGHT,
             width: this.WIDTH
           },
           styles.container,
           this.props.style
-        ]:[
-        ]}>
+        ]:[]}>
 
           {this.renderShimmerLoading()}
-          <View style={!animating?{width:0,height:0}:{}}>
+          <View style={animating?{width:0,height:0}:{}}>
             {this.props.children}
           </View>
         </View>
