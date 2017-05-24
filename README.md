@@ -5,7 +5,7 @@
 Placeholder for both IOS and Android
 </h5>
 <p align="center">
-<img src="./example.gif">
+<img src="https://github.com/tomzaku/react-native-shimmer-placeholder/blob/master/example.gif?raw=true">
 </p>
 
 ## Get Started
