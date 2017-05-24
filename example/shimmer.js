@@ -15,7 +15,6 @@ class Line extends PureComponent {
       }, this.props.style]}>
         <View style={[this.props.style]} />
       </View>
-
     );
   }
 }

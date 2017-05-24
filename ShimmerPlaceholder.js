@@ -12,19 +12,19 @@ import {
 import LinearGradient from 'react-native-linear-gradient'
 
 export default class ShimmerPlaceHolder extends PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       positionVerticalLine: new Animated.Value(-this.WIDTH_LINE),
       isDisplayChildComponent: this.props.isDisplayChildComponent ? this.props.isDisplayChildComponent : false
     }
-    this.WIDTH = this.props.width || 200
-    this.HEIGHT = this.props.height || 15
-    this.WIDTH_LINE = this.props.widthLine || 90
+    this.WIDTH = this.props.width ? this.props.width : 200
+    this.HEIGHT = this.props.height ? this.props.height : 15
+    this.WIDTH_LINE = this.props.widthLine ? this.props.widthLine : 90
     this.refreshIntervalId = null
     this.positionVerticalLine = new Animated.Value(-this.WIDTH_LINE)
-    this.duration = this.props.duration || 300
-    this.colorShimmer = this.props.colorShimmer || '#e2e2e2'
+    this.duration = this.props.duration ? this.props.duration : 300
+    this.colorShimmer = this.props.colorShimmer ? this.props.colorShimmer : '#e2e2e2'
     if (this.props.reverse === true ) {
       this.begin = this.WIDTH
       this.end = -this.WIDTH_LINE
@@ -34,7 +34,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
     }
 
   }
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.autoRun== true){
       this.runAnimatedAuto()
     }
@@ -46,7 +46,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
       duration: this.props.duration, // Configuration
     })
   }
-  runAnimatedAuto(){
+  runAnimatedAuto() {
     this.positionVerticalLine.setValue(this.begin)
     Animated.timing(this.positionVerticalLine, { // The value to drive
       toValue: this.end, // Target
@@ -58,7 +58,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
     })
   }
 
-  componentWillReceiveProps({isDisplayChildComponent}){
+  componentWillReceiveProps({ isDisplayChildComponent }){
     if(isDisplayChildComponent!=undefined&&isDisplayChildComponent!=this.state.isDisplayChildComponent){
       this.setState({
         isDisplayChildComponent: isDisplayChildComponent
@@ -66,7 +66,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
     }
   }
   renderShimmerLoading() {
-    const {colorShimmer} = this
+    const { colorShimmer } = this
     if (!this.state.isDisplayChildComponent) return (
       <Animated.View
         style={[
@@ -86,7 +86,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
             x: 1,
             y: 0.25
           }}
-          locations={[0.1, 0.5, 0.9]}>
+          locations={ [0.1, 0.5, 0.9] }>
           </LinearGradient>
       </Animated.View>
     )
@@ -105,7 +105,7 @@ export default class ShimmerPlaceHolder extends PureComponent {
         ]:[]}>
 
           {this.renderShimmerLoading()}
-          <View style={!isDisplayChildComponent?{width:0,height:0}:{}}>
+          <View style={!isDisplayChildComponent?{ width: 0,height: 0 }:{}}>
             {this.props.children}
           </View>
         </View>

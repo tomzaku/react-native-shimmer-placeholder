@@ -94,6 +94,7 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 |**`isDisplayChildComponent`**| Display child components |false|
 |**`style`**|Styles applied to the container of Shimmer Placeholder|`{backgroundColor: '#ebebeb',overflow: 'hidden'}`|
 |**`width`**|With of row|200|
+|**`duration`**|Duration of shimmer over a row|300|
 |**`height`**|height of row|15|
 |**`widthLine`**|width of shimmer|90|
 |**`reverse`**|Reverse direction |`true`|
