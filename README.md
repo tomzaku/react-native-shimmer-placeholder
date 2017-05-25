@@ -17,7 +17,7 @@ Placeholder for both IOS and Android
 
 or
 
-`yarn add react-native-linear-gradient --save && react-native link react-native-linear-gradient`
+`yarn add react-native-linear-gradient && react-native link react-native-linear-gradient`
 
 #### Step 2: Install this package
 
