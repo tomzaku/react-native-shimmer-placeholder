@@ -31,7 +31,7 @@ or
 
 #### Simple
 ``` js
-import ShimmerPlaceHolder from './ShimmerPlaceholder.js'
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 
 <ShimmerPlaceHolder autoRun={true} />
 <ShimmerPlaceHolder autoRun={true} isDisplayChildComponent={isFetched}>
@@ -94,23 +94,24 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 
 ### Props
 
-| Prop | Description | Default |
-|---|---|---|
-|**`isDisplayChildComponent`**| Display child components |false|
-|**`style`**|Styles applied to the container of Shimmer Placeholder|`{backgroundColor: '#ebebeb',overflow: 'hidden'}`|
-|**`width`**|With of row|200|
-|**`duration`**|Duration of shimmer over a row|300|
-|**`height`**|height of row|15|
-|**`widthLine`**|width of shimmer|90|
-|**`reverse`**|Reverse direction |`true`|
-|**`autoRun`**|Run shimmer animated at begin |`true`|
-|**`colorShimmer`**|Color of the shimmer. |*Inherited*|
+| Prop | Description | Type | Default |
+|---|---|---| ---|
+|**`isDisplayChildComponent`**| Display child components | boolean |false|
+|**`style`**|Styles applied to the container of Shimmer Placeholder| |`{backgroundColor: '#ebebeb',overflow: 'hidden'}`|
+|**`width`**|With of row| number |200|
+|**`duration`**|Duration of shimmer over a row| number |300|
+|**`height`**|height of row| number |15|
+|**`widthLine`**|width of shimmer| number |90|
+|**`reverse`**|Reverse direction | boolean |`true`|
+|**`autoRun`**|Run shimmer animated at begin| boolean |`false`|
+|**`colorShimmer`**|Color of the shimmer.| string |*'#e2e2e2'*|
 
 ### Methods
-| Method | Description |
-|---|---|
-|**`runAnimated`**|Run shimmer animated right now |
+| Method | Description | Type
+|---|---| --- |
+|**`runAnimated`**|Run shimmer animated right now | Animated|
 
 ### Contribute
 Contact me if something wrong
-Give me a star if it's helpful
+
+Give me a star if it's helpful <3

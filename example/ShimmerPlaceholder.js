@@ -51,6 +51,8 @@ export default class ShimmerPlaceHolder extends PureComponent {
     Animated.timing(this.positionVerticalLine, { // The value to drive
       toValue: this.end, // Target
       duration: this.props.duration, // Configuration
+      easing: Easing.linear,
+      isInteraction: false
     }).start((event) => {
       if (!this.state.isDisplayChildComponent) {
         this.runAnimatedAuto()
