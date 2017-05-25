@@ -34,6 +34,11 @@ or
 import ShimmerPlaceHolder from './ShimmerPlaceholder.js'
 
 <ShimmerPlaceHolder autoRun={true} />
+<ShimmerPlaceHolder autoRun={true} isDisplayChildComponent={isFetched}>
+  <Text>
+    Wow, awesome here.
+  </Text>
+</ShimmerPlaceHolder>
 
 ```
 
