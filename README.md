@@ -115,3 +115,7 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 Contact me if something wrong
 
 Give me a star if it's helpful <3
+
+### License
+
+MIT
