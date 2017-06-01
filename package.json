@@ -1,6 +1,6 @@
 {
   "name": "react-native-shimmer-placeholder",
-  "version": "1.0.7",
+  "version": "1.0.6",
   "description": "",
   "main": "ShimmerPlaceholder.js",
   "directories": {
@@ -20,7 +20,7 @@
     "loading"
   ],
   "author": "Zaku",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/tomzaku/react-native-shimmer-placeholder/issues"
   },
