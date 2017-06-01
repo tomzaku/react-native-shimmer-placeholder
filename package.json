@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/tomzaku/react-native-shimmer-placeholder/issues"
   },
-  "homepage": "https://github.com/tomzaku/react-native-shimmer-placeholder#readme"
+  "homepage": "https://github.com/tomzaku/react-native-shimmer-placeholder#readme",
+  "dependencies": {
+    "react-native-linear-gradient": "^2.0.0"
+  }
 }

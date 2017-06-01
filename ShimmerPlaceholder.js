@@ -3,36 +3,33 @@
 import React, {PureComponent} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   Animated,
-  Easing,
-  InteractionManager
-} from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
+  Easing
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
-export default class ShimmerPlaceHolder extends PureComponent {
+class ShimmerPlaceHolder extends PureComponent {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       positionVerticalLine: new Animated.Value(-this.WIDTH_LINE),
       isDisplayChildComponent: this.props.isDisplayChildComponent ? this.props.isDisplayChildComponent : false
-    }
-    this.WIDTH = this.props.width ? this.props.width : 200
-    this.HEIGHT = this.props.height ? this.props.height : 15
-    this.WIDTH_LINE = this.props.widthLine ? this.props.widthLine : 90
-    this.refreshIntervalId = null
-    this.positionVerticalLine = new Animated.Value(-this.WIDTH_LINE)
-    this.duration = this.props.duration ? this.props.duration : 300
-    this.colorShimmer = this.props.colorShimmer ? this.props.colorShimmer : '#e2e2e2'
+    };
+    this.WIDTH = this.props.width;
+    this.HEIGHT = this.props.height;
+    this.WIDTH_LINE = this.props.widthLine;
+    this.refreshIntervalId = null;
+    this.positionVerticalLine = new Animated.Value(-this.WIDTH_LINE);
+    this.duration = this.props.duration;
+    this.colorShimmer = this.props.colorShimmer;
     if (this.props.reverse === true ) {
-      this.begin = this.WIDTH
-      this.end = -this.WIDTH_LINE
+      this.begin = this.WIDTH;
+      this.end = -this.WIDTH_LINE;
     }else {
-      this.begin = -this.WIDTH_LINE
-      this.end = this.WIDTH
+      this.begin = -this.WIDTH_LINE;
+      this.end = this.WIDTH;
     }
-
   }
   componentDidMount() {
     if (this.props.autoRun== true){
@@ -116,11 +113,29 @@ export default class ShimmerPlaceHolder extends PureComponent {
     )
   }
 }
-
+ShimmerPlaceHolder.defaultProps = {
+  width: 200,
+  height: 15,
+  widthLine: 90,
+  duration: 300,
+  colorShimmer: '#e2e2e2',
+  reverse: false,
+  autoRun: false,
+};
+ShimmerPlaceHolder.propTypes = {
+  width: React.PropTypes.number,
+  height: React.PropTypes.number,
+  widthLine: React.PropTypes.number,
+  duration: React.PropTypes.number,
+  colorShimmer: React.PropTypes.string,
+  reverse: React.PropTypes.bool,
+  autoRun: React.PropTypes.bool,
+};
+export default ShimmerPlaceHolder;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ebebeb',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   lineComponent: {
     flex: 1,
@@ -128,5 +143,5 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     flex: 1,
-  }
+  },
 });
