@@ -45,47 +45,47 @@ import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 #### Connect more components
 
 ``` js
-componentDidMount(){
-  this.runPlaceHolder()
+componentDidMount() {
+  this.runPlaceHolder();
 }
 runPlaceHolder() {
-  if (Array.isArray(this.loadingAnimated)&&this.loadingAnimated.length>0) {
+  if (Array.isArray(this.loadingAnimated) && this.loadingAnimated.length > 0) {
     Animated.parallel(
-      this.loadingAnimated.map(animate=> {
+      this.loadingAnimated.map(animate => {
         if (animate&&animate.runAnimated) {
-          return animate.runAnimated()
+          return animate.runAnimated();
         }
-        return null
+        return null;
       }),
       {
-        stopTogether: false
+        stopTogether: false,
       }
     ).start(() => {
-        this.runAnimated()
+        this.runAnimated();
     })
   }
 }
-_renderRows(loadingAnimated,numberRow,uniqueKey){
-  shimmerRows=[]
-  for(let index=0;index<numberRow;index++ ){
+_renderRows(loadingAnimated, numberRow, uniqueKey) {
+  let shimmerRows = [];
+  for(let index = 0; index < numberRow; index++ ){
     shimmerRows.push(
       <ShimmerPlaceHolder
           key={`loading-${index}-${uniqueKey}`}
-          ref = {(ref) => loadingAnimated.push(ref)}
-          style={{marginBottom: 7}}
+          ref={(ref) => loadingAnimated.push(ref)}
+          style={{ marginBottom: 7 }}
       />
     )
   }
-  return(
+  return (
     <View>
       {shimmerRows}
     </View>
   )
 }
-render(){
-  this.loadingAnimated=[]
+render() {
+  this.loadingAnimated = [];
   return(
-    {this._renderRows(this.loadingAnimated,3,'3rows')}
+    {this._renderRows(this.loadingAnimated, 3, '3rows')}
   )
 }
 ```
@@ -118,4 +118,4 @@ Give me a star if it's helpful <3
 
 ### License
 
-MIT
+[MIT](https://github.com/tomzaku/react-native-shimmer-placeholder/blob/master/LICENSE)
