@@ -13,14 +13,14 @@ class ShimmerPlaceHolder extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      positionVerticalLine: new Animated.Value(-this.WIDTH_LINE),
+      positionLine: new Animated.Value(-this.WIDTH_LINE),
       isDisplayChildComponent: this.props.isDisplayChildComponent ? this.props.isDisplayChildComponent : false
     };
     this.WIDTH = this.props.width;
     this.HEIGHT = this.props.height;
     this.WIDTH_LINE = this.props.widthLine;
     this.refreshIntervalId = null;
-    this.positionVerticalLine = new Animated.Value(-this.WIDTH_LINE);
+    this.positionLine = new Animated.Value(-this.WIDTH_LINE);
     this.duration = this.props.duration;
     this.colorShimmer = this.props.colorShimmer;
     if (this.props.reverse === true ) {
@@ -33,31 +33,19 @@ class ShimmerPlaceHolder extends PureComponent {
   }
   componentDidMount() {
     if (this.props.autoRun== true){
-      this.runAnimatedAuto()
+      // this.runAnimatedAuto()
+      const moveAnimated = this.runAnimated();
+      Animated.loop(moveAnimated).start();
     }
   }
   runAnimated = () =>  {
-    this.positionVerticalLine.setValue(this.begin)
-    return Animated.timing(this.positionVerticalLine, { // The value to drive
+    this.positionLine.setValue(this.begin)
+    return Animated.timing(this.positionLine, { // The value to drive
       toValue: this.end, // Target
       duration: this.props.duration, // Configuration
       isInteraction: false
     })
   }
-  runAnimatedAuto() {
-    this.positionVerticalLine.setValue(this.begin)
-    Animated.timing(this.positionVerticalLine, { // The value to drive
-      toValue: this.end, // Target
-      duration: this.props.duration, // Configuration
-      easing: Easing.linear,
-      isInteraction: false
-    }).start((event) => {
-      if (!this.state.isDisplayChildComponent) {
-        this.runAnimatedAuto()
-      }
-    })
-  }
-
   componentWillReceiveProps({ isDisplayChildComponent }){
     if(isDisplayChildComponent!=undefined&&isDisplayChildComponent!=this.state.isDisplayChildComponent){
       this.setState({
@@ -72,7 +60,7 @@ class ShimmerPlaceHolder extends PureComponent {
         style={[
           styles.lineComponent, {
             width: this.WIDTH_LINE,
-            left: this.positionVerticalLine,
+            left: this.positionLine,
           }
       ]}>
         <LinearGradient

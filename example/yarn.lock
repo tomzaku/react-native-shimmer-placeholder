@@ -2947,6 +2947,12 @@ react-native-linear-gradient@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.0.0.tgz#7442c00e1fcd9fca329119dcbaf744d12bcd1b5a"
 
+react-native-shimmer-placeholder@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/react-native-shimmer-placeholder/-/react-native-shimmer-placeholder-1.0.10.tgz#dee3241555208b7dd664014772c60dfa1cb9cae2"
+  dependencies:
+    react-native-linear-gradient "^2.0.0"
+
 react-native@0.44.0:
   version "0.44.0"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.44.0.tgz#06427a30053f2d555c60fe0b9afcc6c778db09de"
