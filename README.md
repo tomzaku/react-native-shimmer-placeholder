@@ -11,7 +11,7 @@ Placeholder for both IOS and Android
 ## Get Started
 
 ### Installation
-#### Step 1: Install react-native-linear-gradient
+#### Step 1: Install react-native-linear-gradient (dependence)
 
 `npm i react-native-linear-gradient --save && react-native link react-native-linear-gradient`
 
@@ -34,7 +34,7 @@ or
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 
 <ShimmerPlaceHolder autoRun={true} />
-<ShimmerPlaceHolder autoRun={true} isDisplayChildComponent={isFetched}>
+<ShimmerPlaceHolder autoRun={true} visable={isFetched}>
   <Text>
     Wow, awesome here.
   </Text>
@@ -52,8 +52,8 @@ runPlaceHolder() {
   if (Array.isArray(this.loadingAnimated) && this.loadingAnimated.length > 0) {
     Animated.parallel(
       this.loadingAnimated.map(animate => {
-        if (animate&&animate.runAnimated) {
-          return animate.runAnimated();
+        if (animate&&animate.getAnimated) {
+          return animate.getAnimated();
         }
         return null;
       }),
@@ -61,7 +61,7 @@ runPlaceHolder() {
         stopTogether: false,
       }
     ).start(() => {
-        this.runAnimated();
+        this.runPlaceHolder();
     })
   }
 }
@@ -96,25 +96,24 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 
 | Prop | Description | Type | Default |
 |---|---|---| ---|
-|**`isDisplayChildComponent`**| Display child components | boolean |false|
+|**`visiable`**| Visiable child components | boolean |false|
 |**`style`**|Styles applied to the container of Shimmer Placeholder| |`{backgroundColor: '#ebebeb',overflow: 'hidden'}`|
 |**`width`**|With of row| number |200|
 |**`duration`**|Duration of shimmer over a row| number |300|
 |**`height`**|height of row| number |15|
-|**`widthLine`**|width of shimmer| number |90|
+|**`widthLine`**|percent of line placeholder| number |0.7|
 |**`reverse`**|Reverse direction | boolean |`true`|
 |**`autoRun`**|Run shimmer animated at begin| boolean |`false`|
-|**`colorShimmer`**|Color of the shimmer.| string |*'#e2e2e2'*|
+|**`colorShimmer`**|Color of the shimmer.| string |*['#ebebeb', '#818181', '#ebebeb']*|
 
 ### Methods
 | Method | Description | Type
 |---|---| --- |
-|**`runAnimated`**|Run shimmer animated right now | Animated|
+|**`getAnimated`**|get Animated of Placeholder | Animated|
 
 ### Contribute
-Contact me if something wrong
 
-Give me a star if it's helpful <3
+Any help this module will be approciate!
 
 ### License
 

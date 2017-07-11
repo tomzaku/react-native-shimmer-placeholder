@@ -1,18 +1,17 @@
-//import liraries
+// import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 class CustomLinearGradient extends Component {
   render() {
-    const { color, colorShimmer, widthShimmer } = this.props;
-    // const color = '#4c669f';
+    const { locationStart, colorShimmer, widthShimmer } = this.props;
     return (
       <LinearGradient
-        colors={colorShimmer} 
+        colors={colorShimmer}
         style={{ flex: 1 }}
         start={{
-          x: -1 ,
+          x: -1,
           y: 0.5,
         }}
         end={{
@@ -20,13 +19,19 @@ class CustomLinearGradient extends Component {
           y: 0.5,
         }}
        //  locations={[0, 0.5, 1]}
-        locations={[color + widthShimmer , color + 0.5 + widthShimmer / 2 , color + 1 ]}
+        locations={[locationStart + widthShimmer, locationStart + 0.5 + widthShimmer / 2, locationStart + 1]}
       />
-    )
+    );
   }
 }
+CustomLinearGradient.propTypes = {
+  locationStart: React.PropTypes.any,
+  colorShimmer: React.PropTypes.array,
+  widthShimmer: React.PropTypes.number,
+};
 
-Animated.ALinearGradient = Animated.createAnimatedComponent(CustomLinearGradient);
+
+Animated.LinearGradient = Animated.createAnimatedComponent(CustomLinearGradient);
 
 
 // create a component
@@ -35,15 +40,15 @@ class ShimmerPlaceHolder extends Component {
     super(props);
     // this.beginShimmerPosition = new Animated.Value(-1);
     this.state = {
-      isDisplayChildComponent: false,
+      visible: false,
       beginShimmerPosition: new Animated.Value(-1),
-    }
+    };
   }
   componentDidMount = () => {
     const { autoRun } = this.props;
     const shimmerAnimated = this.getAnimated();
-    if ( autoRun ) {
-      Animated.loop(shimmerAnimated).start();
+    if (autoRun) {
+      shimmerAnimated.start();
     }
   }
   getAnimated = () => {
@@ -56,53 +61,43 @@ class ShimmerPlaceHolder extends Component {
       // delay: -400
     });
   }
-  componentWillReceiveProps({ isDisplayChildComponent }){
-    // if(isDisplayChildComponent!=undefined&&isDisplayChildComponent!=this.state.isDisplayChildComponent){
-    //   this.setState({
-    //     isDisplayChildComponent: isDisplayChildComponent
-    //   })
-    // }
-  }
   render() {
     const { width, reverse, height, colorShimmer, style, widthShimmer, children } = this.props;
-    // let beginPostioner = -1;
-    // let endPosition = 1;
-    // if (reverse) {
-    //   beginPostioner = 1;
-    //   endPosition = -1;
-    // }
-    const { isDisplayChildComponent } = this.props;
+    let beginPostioner = -0.65;
+    let endPosition = 0.65;
+    if (reverse) {
+      beginPostioner = 0.65;
+      endPosition = -0.65;
+    }
+    const { visible } = this.props;
     const newValue = this.state.beginShimmerPosition.interpolate({
       inputRange: [-1, 1],
-      outputRange: [-1, 1]
+      outputRange: [beginPostioner, endPosition],
     });
     return (
-      <View style={!isDisplayChildComponent?[
-          {
-            height,
-            width,
-          },
-          styles.container,
-          style
-        ]:[]}>
-        {!isDisplayChildComponent
+      <View style={!visible
+      ? [{ height, width }, styles.container, style]
+      : []
+      }
+      >
+        {!visible
         ? (
-          <View style={{ flex: 1}}>
-            <Animated.ALinearGradient
-              color={newValue}
+          <View style={{ flex: 1 }}>
+            <Animated.LinearGradient
+              locationStart={newValue}
               colorShimmer={colorShimmer}
               widthShimmer={widthShimmer}
             />
-             {/*Force run children */}
-            <View style={{ width: 0,height: 0 }}> 
-            {this.props.children}
+            {/* Force run children */}
+            <View style={{ width: 0, height: 0 }}>
+              {this.props.children}
             </View>
           </View>
           )
         : children
         }
       </View>
-      
+
     );
   }
 }
@@ -110,11 +105,11 @@ ShimmerPlaceHolder.defaultProps = {
   width: 200,
   height: 15,
   widthShimmer: 0.7,
-  duration: 3000,
+  duration: 1000,
   colorShimmer: ['#ebebeb', '#818181', '#ebebeb'],
   reverse: false,
   autoRun: false,
-  isDisplayChildComponent: false,
+  visible: false,
 };
 // define your styles
 const styles = StyleSheet.create({
@@ -131,6 +126,9 @@ ShimmerPlaceHolder.propTypes = {
   colorShimmer: React.PropTypes.array,
   reverse: React.PropTypes.bool,
   autoRun: React.PropTypes.bool,
+  visible: React.PropTypes.bool,
+  children: React.PropTypes.any,
+  style: React.PropTypes.any,
 };
 // make this component available to the app
 export default ShimmerPlaceHolder;

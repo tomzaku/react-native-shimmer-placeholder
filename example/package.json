@@ -9,7 +9,6 @@
   "dependencies": {
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
-    "react-native-animated-linear-gradient": "^1.0.2",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-shimmer-placeholder": "^1.0.10"
   },
