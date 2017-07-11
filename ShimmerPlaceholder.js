@@ -24,9 +24,8 @@ class CustomLinearGradient extends Component {
     );
   }
 }
-CustomLinearGradient.
 CustomLinearGradient.propTypes = {
-  color: React.PropTypes.any,
+  locationStart: React.PropTypes.any,
   colorShimmer: React.PropTypes.array,
   widthShimmer: React.PropTypes.number,
 };
@@ -41,7 +40,7 @@ class ShimmerPlaceHolder extends Component {
     super(props);
     // this.beginShimmerPosition = new Animated.Value(-1);
     this.state = {
-      isDisplayChildComponent: false,
+      visible: false,
       beginShimmerPosition: new Animated.Value(-1),
     };
   }
@@ -49,7 +48,7 @@ class ShimmerPlaceHolder extends Component {
     const { autoRun } = this.props;
     const shimmerAnimated = this.getAnimated();
     if (autoRun) {
-      Animated.loop(shimmerAnimated).start();
+      shimmerAnimated.start();
     }
   }
   getAnimated = () => {
@@ -70,18 +69,18 @@ class ShimmerPlaceHolder extends Component {
       beginPostioner = 0.65;
       endPosition = -0.65;
     }
-    const { isDisplayChildComponent } = this.props;
+    const { visible } = this.props;
     const newValue = this.state.beginShimmerPosition.interpolate({
       inputRange: [-1, 1],
       outputRange: [beginPostioner, endPosition],
     });
     return (
-      <View style={!isDisplayChildComponent
+      <View style={!visible
       ? [{ height, width }, styles.container, style]
       : []
       }
       >
-        {!isDisplayChildComponent
+        {!visible
         ? (
           <View style={{ flex: 1 }}>
             <Animated.LinearGradient
@@ -110,7 +109,7 @@ ShimmerPlaceHolder.defaultProps = {
   colorShimmer: ['#ebebeb', '#818181', '#ebebeb'],
   reverse: false,
   autoRun: false,
-  isDisplayChildComponent: false,
+  visible: false,
 };
 // define your styles
 const styles = StyleSheet.create({
@@ -127,7 +126,7 @@ ShimmerPlaceHolder.propTypes = {
   colorShimmer: React.PropTypes.array,
   reverse: React.PropTypes.bool,
   autoRun: React.PropTypes.bool,
-  isDisplayChildComponent: React.PropTypes.bool,
+  visible: React.PropTypes.bool,
   children: React.PropTypes.any,
   style: React.PropTypes.any,
 };
