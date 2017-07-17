@@ -96,7 +96,7 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 
 | Prop | Description | Type | Default |
 |---|---|---| ---|
-|**`visiable`**| Visiable child components | boolean |false|
+|**`visible`**| visible child components | boolean |false|
 |**`style`**|Styles applied to the container of Shimmer Placeholder| |`{backgroundColor: '#ebebeb',overflow: 'hidden'}`|
 |**`width`**|With of row| number |200|
 |**`duration`**|Duration of shimmer over a row| number |300|
