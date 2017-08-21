@@ -62,14 +62,13 @@ class ShimmerPlaceHolder extends Component {
     });
   }
   render() {
-    const { width, reverse, height, colorShimmer, style, widthShimmer, children } = this.props;
+    const { width, reverse, height, colorShimmer, style, widthShimmer, children, visible } = this.props;
     let beginPostioner = -0.65;
     let endPosition = 0.65;
     if (reverse) {
       beginPostioner = 0.65;
       endPosition = -0.65;
     }
-    const { visible } = this.props;
     const newValue = this.state.beginShimmerPosition.interpolate({
       inputRange: [-1, 1],
       outputRange: [beginPostioner, endPosition],

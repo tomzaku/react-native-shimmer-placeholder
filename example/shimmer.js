@@ -60,6 +60,7 @@ export default class Shimmer extends Component {
       // console.log('====================================');
       // console.log('....', this.animatedAvatarReverseLoading);
       // console.log('====================================');
+      this.animatedAvatarReverseLoading = this.animatedAvatarReverseLoading.slice(this.animatedAvatarReverseLoading.length - 5, this.animatedAvatarReverseLoading.length);
     if (Array.isArray(this.animatedAvatarReverseLoading) && this.animatedAvatarReverseLoading.length > 0) {
       const sequenceReverseAnimated = Animated.sequence([
         this.animatedAvatarReverseLoading[0].getAnimated(), // image left
@@ -173,7 +174,7 @@ export default class Shimmer extends Component {
     )
   }
   _renderReverseAnimated= () => {
-    // this.animatedAvatarReverseLoading= []
+    // this.animatedAvatarReverseLoading = []
     return(
       <View style={{ flexDirection: 'row-reverse' }}>
         <ShimmerPlaceHolder
@@ -237,7 +238,7 @@ export default class Shimmer extends Component {
             ref={(ref) => this.bigImageAndSomeRowsAnimated.push(ref)}
             width={175}
             height={175}
-            isDisplayChildComponent={imageIsFetched}
+            visible={imageIsFetched}
           >
             <Image
               style={{ width: 175, height: 175 }}
@@ -252,7 +253,7 @@ export default class Shimmer extends Component {
               style={{ marginTop: 7 }}
               width={350}
               height={9}
-              isDisplayChildComponent={isfetched}
+              visible={isfetched}
             >
               <Text style={{ marginTop: 3 }}>Lorem Ipsum is simply dummy text of the printing</Text>
             </ShimmerPlaceHolder>
@@ -261,7 +262,7 @@ export default class Shimmer extends Component {
               style={{ marginTop: 7 }}
               width={350}
               height={9}
-              isDisplayChildComponent={isfetched}
+              visible={isfetched}
             >
               <Text style={{ marginTop: 3 }}>Lorem Ipsum is simply dummy text of the printing </Text>
             </ShimmerPlaceHolder>

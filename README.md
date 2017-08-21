@@ -34,7 +34,7 @@ or
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 
 <ShimmerPlaceHolder autoRun={true} />
-<ShimmerPlaceHolder autoRun={true} visable={isFetched}>
+<ShimmerPlaceHolder autoRun={true} visible={isFetched}>
   <Text>
     Wow, awesome here.
   </Text>
