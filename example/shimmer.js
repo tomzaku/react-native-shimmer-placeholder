@@ -239,7 +239,7 @@ export default class Shimmer extends Component {
           >
             <Image
               style={{ width: 175, height: 175 }}
-              source={{ uri: 'https://unsplash.it/300/300' }}
+              source={{ uri: 'https://unsplash.it/350/350' }}
               onLoad={() => { this.setState({ imageIsFetched: true }); }}
 
             />

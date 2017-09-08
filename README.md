@@ -104,7 +104,7 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 |**`widthLine`**|percent of line placeholder| number |0.7|
 |**`reverse`**|Reverse direction | boolean |`true`|
 |**`autoRun`**|Run shimmer animated at begin| boolean |`false`|
-|**`colorShimmer`**|Color of the shimmer.| string |*['#ebebeb', '#818181', '#ebebeb']*|
+|**`colorShimmer`**|Color of the shimmer.| string |*['#ebebeb', '#c5c5c5', '#ebebeb']*|
 
 ### Methods
 | Method | Description | Type
