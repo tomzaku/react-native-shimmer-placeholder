@@ -44,15 +44,21 @@ class ShimmerPlaceHolder extends Component {
       beginShimmerPosition: new Animated.Value(-1),
     };
   }
-  componentDidMount = () => {
+  componentDidMount() {
     const { autoRun } = this.props;
-    const shimmerAnimated = this.getAnimated();
     if (autoRun) {
-      shimmerAnimated.start();
+      this.loopAnimated();
     }
+  }
+  loopAnimated() {
+    const shimmerAnimated = this.getAnimated();
+    shimmerAnimated.start(() => {
+      this.loopAnimated();
+    })
   }
   getAnimated = () => {
     // this.state.color.setValue(0);
+    this.state.beginShimmerPosition.setValue(-1);
     return Animated.timing(this.state.beginShimmerPosition, {
       toValue: 1,
       duration: this.props.duration,
@@ -63,11 +69,11 @@ class ShimmerPlaceHolder extends Component {
   }
   render() {
     const { width, reverse, height, colorShimmer, style, widthShimmer, children, visible } = this.props;
-    let beginPostioner = -0.65;
-    let endPosition = 0.65;
+    let beginPostioner = -0.7;
+    let endPosition = 0.7;
     if (reverse) {
-      beginPostioner = 0.65;
-      endPosition = -0.65;
+      beginPostioner = 0.7;
+      endPosition = -0.7;
     }
     const newValue = this.state.beginShimmerPosition.interpolate({
       inputRange: [-1, 1],

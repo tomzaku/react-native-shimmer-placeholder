@@ -57,12 +57,9 @@ export default class Shimmer extends Component {
     }
   }
   runAvatarReverseAnimated() {
-      // console.log('====================================');
-      // console.log('....', this.animatedAvatarReverseLoading);
-      // console.log('====================================');
-      this.animatedAvatarReverseLoading = this.animatedAvatarReverseLoading.slice(this.animatedAvatarReverseLoading.length - 5, this.animatedAvatarReverseLoading.length);
+    this.animatedAvatarReverseLoading = this.animatedAvatarReverseLoading.slice(this.animatedAvatarReverseLoading.length - 5, this.animatedAvatarReverseLoading.length);
     if (Array.isArray(this.animatedAvatarReverseLoading) && this.animatedAvatarReverseLoading.length > 0) {
-      const sequenceReverseAnimated = Animated.sequence([
+      const sequenceReverseAnimated = Animated.stagger(600,[
         this.animatedAvatarReverseLoading[0].getAnimated(), // image left
         Animated.parallel( //4 row middle
           this.animatedAvatarReverseLoading.slice(1, this.animatedAvatarReverseLoading.length-1).map(animate => {
@@ -103,7 +100,7 @@ export default class Shimmer extends Component {
   }
   runAvatarAnimated() {
     if (Array.isArray(this.avatarLoadingAnimated) && this.avatarLoadingAnimated.length > 0) {
-      const avatarandrowsAnimated = Animated.sequence([
+      const avatarandrowsAnimated = Animated.stagger(600,[
         this.avatarLoadingAnimated[0].getAnimated(),
         Animated.parallel(
           this.avatarLoadingAnimated.slice(1).map(animate => {
