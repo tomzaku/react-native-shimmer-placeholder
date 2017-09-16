@@ -108,6 +108,7 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 |**`reverse`**|Reverse direction | boolean |`true`|
 |**`autoRun`**|Run shimmer animated at begin| boolean |`false`|
 |**`colorShimmer`**|Color of the shimmer.| string |*['#ebebeb', '#c5c5c5', '#ebebeb']*|
+|**`backgroundColorBehindBorder`**|If you use border in style you have to set background behide(to force Android work).| string |*'white'*|
 
 ### Methods
 | Method | Description | Type

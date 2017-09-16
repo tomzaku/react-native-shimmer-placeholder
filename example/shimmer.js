@@ -237,6 +237,7 @@ export default class Shimmer extends Component {
             height={200}
             style={{ width: 200, height: 200, borderRadius: 100 }}
             visible={imageIsFetched}
+            backgroundColorBehindBorder={'white'}
           >
             <Image
               style={{ width: 200, height: 200, borderRadius: 100 }}
