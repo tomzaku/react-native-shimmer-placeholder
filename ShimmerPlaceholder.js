@@ -68,7 +68,7 @@ class ShimmerPlaceHolder extends Component {
     });
   }
   render() {
-    const { width, reverse, height, colorShimmer, style, widthShimmer, children, visible, backgroundColorBehindBorder } = this.props;
+    const { width, reverse, height, colorShimmer, style, widthShimmer, children, visible, backgroundColorBehindBorder, hasBorder } = this.props;
     let beginPostioner = -0.7;
     let endPosition = 0.7;
     if (reverse) {
@@ -97,8 +97,8 @@ class ShimmerPlaceHolder extends Component {
               <View style={{ width: 0, height: 0 }}>
                 {this.props.children}
               </View>
-              {style && style.borderRadius && Platform.OS === 'android'
-               ? <View style={{ 
+              {((style && style.borderRadius) || hasBorder) && Platform.OS === 'android'
+              ? <View style={{
                 position: 'absolute',
                 top: -40,
                 bottom: -40,
@@ -106,8 +106,9 @@ class ShimmerPlaceHolder extends Component {
                 left: -40,
                 borderRadius: width / 2 + 40 / 2,
                 borderWidth: 40,
-                borderColor: backgroundColorBehindBorder
-                }} />
+                borderColor: backgroundColorBehindBorder,
+              }}
+              />
                : null }
             </View>
             )
@@ -126,7 +127,8 @@ ShimmerPlaceHolder.defaultProps = {
   reverse: false,
   autoRun: false,
   visible: false,
-  backgroundColorBehindBorder: 'white'
+  backgroundColorBehindBorder: 'white',
+  hasBorder: false,
 };
 // define your styles
 const styles = StyleSheet.create({
@@ -146,6 +148,8 @@ ShimmerPlaceHolder.propTypes = {
   visible: React.PropTypes.bool,
   children: React.PropTypes.any,
   style: React.PropTypes.any,
+  backgroundColorBehindBorder: React.PropTypes.string,
+  hasBorder: React.PropTypes.bool,
 };
 // make this component available to the app
 export default ShimmerPlaceHolder;
