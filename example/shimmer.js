@@ -178,7 +178,7 @@ export default class Shimmer extends Component {
           ref={(ref) => this.animatedAvatarReverseLoading.push(ref)}
           width={60}
           height={60}
-          style={{ marginLeft: 16, }}
+          style={{ marginLeft: 16, borderRadius: 30}}
           reverse
         />
         <View>
@@ -233,13 +233,14 @@ export default class Shimmer extends Component {
         <View style={{ alignItems: 'center' }} >
           <ShimmerPlaceHolder
             ref={(ref) => this.bigImageAndSomeRowsAnimated.push(ref)}
-            width={175}
-            height={175}
+            width={200}
+            height={200}
+            style={{ width: 200, height: 200, borderRadius: 100 }}
             visible={imageIsFetched}
           >
             <Image
-              style={{ width: 175, height: 175 }}
-              source={{ uri: 'https://unsplash.it/350/350' }}
+              style={{ width: 200, height: 200, borderRadius: 100 }}
+              source={{ uri: 'https://unsplash.it/900/900' }}
               onLoad={() => { this.setState({ imageIsFetched: true }); }}
 
             />
