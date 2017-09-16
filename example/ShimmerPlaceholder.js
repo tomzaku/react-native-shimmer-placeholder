@@ -1,6 +1,6 @@
 // import liraries
 import React, { Component } from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import { View, StyleSheet, Animated, Platform } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 class CustomLinearGradient extends Component {
@@ -68,7 +68,7 @@ class ShimmerPlaceHolder extends Component {
     });
   }
   render() {
-    const { width, reverse, height, colorShimmer, style, widthShimmer, children, visible } = this.props;
+    const { width, reverse, height, colorShimmer, style, widthShimmer, children, visible, backgroundColorBehindBorder } = this.props;
     let beginPostioner = -0.7;
     let endPosition = 0.7;
     if (reverse) {
@@ -80,29 +80,40 @@ class ShimmerPlaceHolder extends Component {
       outputRange: [beginPostioner, endPosition],
     });
     return (
-      <View style={!visible
-      ? [{ height, width }, styles.container, style]
-      : []
-      }
-      >
-        {!visible
-        ? (
-          <View style={{ flex: 1 }}>
-            <Animated.LinearGradient
-              locationStart={newValue}
-              colorShimmer={colorShimmer}
-              widthShimmer={widthShimmer}
-            />
-            {/* Force run children */}
-            <View style={{ width: 0, height: 0 }}>
-              {this.props.children}
-            </View>
-          </View>
-          )
-        : children
+        <View style={!visible
+        ? [{ height, width }, styles.container, style]
+        : []
         }
-      </View>
-
+        >
+          {!visible
+          ? (
+            <View style={{ flex: 1 }}>
+              <Animated.LinearGradient
+                locationStart={newValue}
+                colorShimmer={colorShimmer}
+                widthShimmer={widthShimmer}
+              />
+              {/* Force run children */}
+              <View style={{ width: 0, height: 0 }}>
+                {this.props.children}
+              </View>
+              {style && style.borderRadius && Platform.OS === 'android'
+               ? <View style={{ 
+                position: 'absolute',
+                top: -40,
+                bottom: -40,
+                right: -40,
+                left: -40,
+                borderRadius: width / 2 + 40 / 2,
+                borderWidth: 40,
+                borderColor: backgroundColorBehindBorder
+                }} />
+               : null }
+            </View>
+            )
+          : children
+          }
+        </View>
     );
   }
 }
@@ -115,6 +126,7 @@ ShimmerPlaceHolder.defaultProps = {
   reverse: false,
   autoRun: false,
   visible: false,
+  backgroundColorBehindBorder: 'white'
 };
 // define your styles
 const styles = StyleSheet.create({

@@ -240,7 +240,7 @@ export default class Shimmer extends Component {
           >
             <Image
               style={{ width: 200, height: 200, borderRadius: 100 }}
-              source={{ uri: 'https://unsplash.it/900/900' }}
+              source={{ uri: 'https://unsplash.it/1000/1000' }}
               onLoad={() => { this.setState({ imageIsFetched: true }); }}
 
             />
@@ -274,7 +274,9 @@ export default class Shimmer extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 16,
-    marginTop: 40,
+    padding: 16,
+    paddingTop: 40,
+    paddingBottom: 0,
+    backgroundColor: 'white',
   },
 });
