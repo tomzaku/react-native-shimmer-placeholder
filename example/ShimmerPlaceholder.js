@@ -52,8 +52,11 @@ class ShimmerPlaceHolder extends Component {
   }
   loopAnimated() {
     const shimmerAnimated = this.getAnimated();
+    const { visible } = this.props;
     shimmerAnimated.start(() => {
-      this.loopAnimated();
+      if (!visible) {
+        this.loopAnimated();
+      }
     })
   }
   getAnimated = () => {
