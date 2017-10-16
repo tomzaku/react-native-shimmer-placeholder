@@ -1,5 +1,6 @@
 // import liraries
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { View, StyleSheet, Animated, Platform } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -25,9 +26,9 @@ class CustomLinearGradient extends Component {
   }
 }
 CustomLinearGradient.propTypes = {
-  locationStart: React.PropTypes.any,
-  colorShimmer: React.PropTypes.array,
-  widthShimmer: React.PropTypes.number,
+  locationStart: PropTypes.any,
+  colorShimmer: PropTypes.array,
+  widthShimmer: PropTypes.number,
 };
 
 
@@ -141,18 +142,18 @@ const styles = StyleSheet.create({
   },
 });
 ShimmerPlaceHolder.propTypes = {
-  width: React.PropTypes.number,
-  height: React.PropTypes.number,
-  widthShimmer: React.PropTypes.number,
-  duration: React.PropTypes.number,
-  colorShimmer: React.PropTypes.array,
-  reverse: React.PropTypes.bool,
-  autoRun: React.PropTypes.bool,
-  visible: React.PropTypes.bool,
-  children: React.PropTypes.any,
-  style: React.PropTypes.any,
-  backgroundColorBehindBorder: React.PropTypes.string,
-  hasBorder: React.PropTypes.bool,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  widthShimmer: PropTypes.number,
+  duration: PropTypes.number,
+  colorShimmer: PropTypes.array,
+  reverse: PropTypes.bool,
+  autoRun: PropTypes.bool,
+  visible: PropTypes.bool,
+  children: PropTypes.any,
+  style: PropTypes.any,
+  backgroundColorBehindBorder: PropTypes.string,
+  hasBorder: PropTypes.bool,
 };
 // make this component available to the app
 export default ShimmerPlaceHolder;
