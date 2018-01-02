@@ -11,11 +11,11 @@ class CustomLinearGradient extends Component {
       <LinearGradient
         colors={colorShimmer}
         style={{ flex: 1 }}
-        start={{
+        startPoint={{
           x: -1,
           y: 0.5,
         }}
-        end={{
+        endPoint={{
           x: 2,
           y: 0.5,
         }}
