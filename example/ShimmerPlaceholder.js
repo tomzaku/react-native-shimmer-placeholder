@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
   },
 });
 ShimmerPlaceHolder.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
+  width: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
+  height: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
   widthShimmer: PropTypes.number,
   duration: PropTypes.number,
   colorShimmer: PropTypes.array,
