@@ -2,7 +2,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { View, StyleSheet, Animated, Platform } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+
+// https://gist.github.com/FGRibreau/3135914
+function module_exist(name){
+  try{require(name);} catch(err){if(err.code === 'MODULE_NOT_FOUND'){return false;}}
+  return true;
+};
+
+const LinearGradient = module_exist( 'expo' ) ? require( 'expo' ).LinearGradient : require( 'react-native-linear-gradient' )
 
 class CustomLinearGradient extends Component {
   render() {
