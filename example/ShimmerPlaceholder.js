@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { View, StyleSheet, Animated, Platform } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient'
 
 class CustomLinearGradient extends Component {
   render() {

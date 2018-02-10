@@ -14,9 +14,8 @@ Placeholder for both IOS and Android
 ## Get Started
 
 ### Installation
-#### Step 1: Install react-native-linear-gradient (dependence)
 
-**Note** : If you're using [Expo](https://expo.io) you *don't need* to install `react-native-linear-gradient`, you can ignore this step
+##### Step 1: Install react-native-linear-gradient (dependence)
 
 `npm i react-native-linear-gradient --save && react-native link react-native-linear-gradient`
 
@@ -24,13 +23,25 @@ or
 
 `yarn add react-native-linear-gradient && react-native link react-native-linear-gradient`
 
-#### Step 2: Install this package
 
+##### Step 2: Install this package 
 `npm i react-native-shimmer-placeholder --save`
 
 or
 
 `yarn add react-native-shimmer-placeholder`
+
+
+That's all!
+
+### For who using [Expo](https://expo.io)
+
+Just install direct this package 
+
+```
+npm install https://github.com/tomzaku/react-native-shimmer-placeholder.git#expo --save
+```
+
 
 ### Usage
 
