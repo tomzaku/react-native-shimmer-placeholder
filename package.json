@@ -1,32 +1,31 @@
 {
   "name": "react-native-shimmer-placeholder",
   "version": "1.0.24",
-  "description": "",
-  "main": "ShimmerPlaceholder.js",
+  "author": "Zaku",
+  "bugs": {
+    "url": "https://github.com/tomzaku/react-native-shimmer-placeholder/issues"
+  },
   "directories": {
     "example": "example"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "homepage": "https://github.com/tomzaku/react-native-shimmer-placeholder#readme",
+  "keywords": [
+    "loading",
+    "placeholder",
+    "react-native",
+    "shimmer"
+  ],
+  "license": "MIT",
+  "main": "ShimmerPlaceholder.js",
+  "peerDependencies": {
+    "prop-types": ">=15.6.0",
+    "react-native-linear-gradient": ">=2.4.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tomzaku/react-native-shimmer-placeholder.git"
   },
-  "keywords": [
-    "shimmer",
-    "placeholder",
-    "react-native",
-    "loading"
-  ],
-  "author": "Zaku",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tomzaku/react-native-shimmer-placeholder/issues"
-  },
-  "homepage": "https://github.com/tomzaku/react-native-shimmer-placeholder#readme",
-  "dependencies": {
-    "react-native-linear-gradient": "2.4.0",
-    "prop-types": "15.6.0"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
