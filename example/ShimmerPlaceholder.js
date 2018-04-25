@@ -35,7 +35,7 @@ class ShimmerPlaceHolder extends Component {
     return Animated.timing(this.state.beginShimmerPosition, {
       toValue: 1,
       duration: this.props.duration,
-      useNativeDriver: true,
+      useNativeDriver: true
       // easing: Easing.linear,
       // delay: -400
     });
@@ -51,21 +51,16 @@ class ShimmerPlaceHolder extends Component {
       children,
       visible,
       backgroundColorBehindBorder,
-      hasBorder
+      hasBorder,
+      location
     } = this.props;
-    let beginPostioner = -0.7;
-    let endPosition = 0.7;
+    let outputRange = [-width, width];
     if (reverse) {
-      beginPostioner = 0.7;
-      endPosition = -0.7;
+      outputRange = outputRange.reverse();
     }
-    const newValue = this.state.beginShimmerPosition.interpolate({
-      inputRange: [-1, 1],
-      outputRange: [beginPostioner, endPosition]
-    });
     const linearTranslate = this.state.beginShimmerPosition.interpolate({
       inputRange: [-1, 1],
-      outputRange: [-width, width]
+      outputRange: outputRange
     });
     return (
       <View
@@ -73,10 +68,11 @@ class ShimmerPlaceHolder extends Component {
       >
         {!visible ? (
           <View style={{ flex: 1, backgroundColor: colorShimmer[0] }}>
-
             {/* USING TRANSFORM */}
-            <Animated.View style={{flex: 1, transform: [{ translateX: linearTranslate }] }}>
-             <LinearGradient
+            <Animated.View
+              style={{ flex: 1, transform: [{ translateX: linearTranslate }] }}
+            >
+              <LinearGradient
                 colors={colorShimmer}
                 style={{ flex: 1 }}
                 start={{
@@ -87,13 +83,9 @@ class ShimmerPlaceHolder extends Component {
                   x: 2,
                   y: 0.5
                 }}
-                //  locations={[0, 0.5, 1]}
-                locations={[
-                  0.3, 0.5, 0.7
-                ]}
+                locations={location}
               />
             </Animated.View>
-            
             {/* Force run children */}
             <View style={{ width: 0, height: 0 }}>{this.props.children}</View>
             {/* If style has border */}
@@ -130,7 +122,8 @@ ShimmerPlaceHolder.defaultProps = {
   autoRun: false,
   visible: false,
   backgroundColorBehindBorder: "white",
-  hasBorder: false
+  hasBorder: false,
+  location: [0.3, 0.5, 0.7]
 };
 // define your styles
 const styles = StyleSheet.create({
