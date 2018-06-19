@@ -1,9 +1,16 @@
+
 <h2 align="center">
   React Native Shimmer Placeholder
 </h2>
+<p align="center">
+  <a href="https://www.npmjs.com/package/react-native-shimmer-placeholder"><img src="https://img.shields.io/npm/v/react-native-shimmer-placeholder.svg?style=flat-square"></a>
+  <a href="https://www.npmjs.com/package/react-native-shimmer-placeholder"><img src="https://img.shields.io/npm/dm/react-native-shimmer-placeholder.svg?style=flat-square"></a>
+  <a href="https://packagephobia.now.sh/badge?p=react-native-shimmer-placeholder@1.0.29"><img src="https://packagephobia.now.sh/badge?p=react-native-shimmer-placeholder@1.0.29"></a>
+</p>
 <h5 align="center">
 Placeholder for both IOS and Android
 </h5>
+
 <p align="center">`
 <img src="https://github.com/tomzaku/react-native-shimmer-placeholder/blob/master/example.gif?raw=true">
 </p>`
@@ -12,7 +19,7 @@ Placeholder for both IOS and Android
 </p> -->
 
 ## Get Started
-
+![install size](https://packagephobia.now.sh/badge?p=react-native-shimmer-placeholder@1.0.29)
 ### Installation
 
 ##### Step 1: Install react-native-linear-gradient (dependence)
