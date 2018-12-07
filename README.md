@@ -124,7 +124,7 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 |**`width`**|With of row| number |200|
 |**`duration`**|Duration of shimmer over a row| number |300|
 |**`height`**|height of row| number |15|
-|**`widthShimmer`**|percent of line placeholder| number |0.7|
+|**`widthShimmer`**|percent of line placeholder| number |1.0|
 |**`reverse`**|Reverse direction | boolean |`true`|
 |**`autoRun`**|Run shimmer animated at begin| boolean |`false`|
 |**`colorShimmer`**|Color of the shimmer.| string |*['#ebebeb', '#c5c5c5', '#ebebeb']*|
