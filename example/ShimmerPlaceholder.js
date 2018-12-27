@@ -1,14 +1,14 @@
+import { Animated, Platform, StyleSheet, View } from "react-native";
 // import liraries
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { View, StyleSheet, Animated, Platform } from "react-native";
+
 import LinearGradient from "react-native-linear-gradient";
+import PropTypes from "prop-types";
 
 // create a component
 class ShimmerPlaceHolder extends Component {
   constructor(props) {
     super(props);
-    // this.beginShimmerPosition = new Animated.Value(-1);
     this.state = {
       visible: false,
       beginShimmerPosition: new Animated.Value(-1)
@@ -20,24 +20,27 @@ class ShimmerPlaceHolder extends Component {
       this.loopAnimated();
     }
   }
+  componentWillUnmount() {
+    const shimmerAnimated = this.getAnimated();
+    shimmerAnimated.stop();
+  }
   loopAnimated() {
     const shimmerAnimated = this.getAnimated();
     const { visible } = this.props;
-    shimmerAnimated.start(() => {
-      if (!visible) {
+    shimmerAnimated.start(({ finished }) => {
+      if (!visible && finished) {
         this.loopAnimated();
       }
     });
   }
   getAnimated = () => {
-    // this.state.color.setValue(0);
     this.state.beginShimmerPosition.setValue(-1);
     return Animated.timing(this.state.beginShimmerPosition, {
       toValue: 1,
+      delay: this.props.delay,
       duration: this.props.duration,
-      useNativeDriver: true
-      // easing: Easing.linear,
-      // delay: -400
+      useNativeDriver: true,
+      isInteraction: this.props.isInteraction,
     });
   };
   render() {
@@ -74,7 +77,7 @@ class ShimmerPlaceHolder extends Component {
             >
               <LinearGradient
                 colors={colorShimmer}
-                style={{ flex: 1 }}
+                style={{ flex: 1, width: width * widthShimmer }}
                 start={{
                   x: -1,
                   y: 0.5
@@ -90,24 +93,24 @@ class ShimmerPlaceHolder extends Component {
             <View style={{ width: 0, height: 0 }}>{this.props.children}</View>
             {/* If style has border */}
             {((style && style.borderRadius) || hasBorder) &&
-            Platform.OS === "android" ? (
-              <View
-                style={{
-                  position: "absolute",
-                  top: -40,
-                  bottom: -40,
-                  right: -40,
-                  left: -40,
-                  borderRadius: width / 2 + 40 / 2,
-                  borderWidth: 40,
-                  borderColor: backgroundColorBehindBorder
-                }}
-              />
-            ) : null}
+              Platform.OS === "android" ? (
+                <View
+                  style={{
+                    position: "absolute",
+                    top: -40,
+                    bottom: -40,
+                    right: -40,
+                    left: -40,
+                    borderRadius: style.borderRadius || (width / 2 + 40 / 2),
+                    borderWidth: 40,
+                    borderColor: backgroundColorBehindBorder
+                  }}
+                />
+              ) : null}
           </View>
         ) : (
-          children
-        )}
+            children
+          )}
       </View>
     );
   }
@@ -115,20 +118,21 @@ class ShimmerPlaceHolder extends Component {
 ShimmerPlaceHolder.defaultProps = {
   width: 200,
   height: 15,
-  widthShimmer: 0.7,
+  widthShimmer: 1,
   duration: 1000,
+  delay: 0,
   colorShimmer: ["#ebebeb", "#c5c5c5", "#ebebeb"],
   reverse: false,
   autoRun: false,
   visible: false,
   backgroundColorBehindBorder: "white",
   hasBorder: false,
-  location: [0.3, 0.5, 0.7]
+  location: [0.3, 0.5, 0.7],
+  isInteraction: true,
 };
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     overflow: "hidden"
   }
 });
@@ -137,6 +141,7 @@ ShimmerPlaceHolder.propTypes = {
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   widthShimmer: PropTypes.number,
   duration: PropTypes.number,
+  delay: PropTypes.number,
   colorShimmer: PropTypes.array,
   reverse: PropTypes.bool,
   autoRun: PropTypes.bool,
@@ -144,7 +149,8 @@ ShimmerPlaceHolder.propTypes = {
   children: PropTypes.any,
   style: PropTypes.any,
   backgroundColorBehindBorder: PropTypes.string,
-  hasBorder: PropTypes.bool
+  hasBorder: PropTypes.bool,
+  isInteraction: PropTypes.bool,
 };
 // make this component available to the app
 export default ShimmerPlaceHolder;
