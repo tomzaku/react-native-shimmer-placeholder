@@ -31,7 +31,7 @@ or
 `yarn add react-native-linear-gradient && react-native link react-native-linear-gradient`
 
 
-##### Step 2: Install this package 
+##### Step 2: Install this package
 `npm i react-native-shimmer-placeholder --save`
 
 or
@@ -43,7 +43,7 @@ That's all!
 
 ### For who using [Expo](https://expo.io)
 
-Just install direct this package 
+Just install direct this package
 
 ```
 npm install https://github.com/tomzaku/react-native-shimmer-placeholder.git#expo --save
@@ -127,6 +127,7 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 |**`widthShimmer`**|percent of line placeholder| number |1.0|
 |**`reverse`**|Reverse direction | boolean |`true`|
 |**`autoRun`**|Run shimmer animated at begin| boolean |`false`|
+|**`isInteraction`**|Defines whether or not the shimmer animation creates an interaction handle on the `InteractionManager`| boolean |`true`|
 |**`colorShimmer`**|Color of the shimmer.| string |*['#ebebeb', '#c5c5c5', '#ebebeb']*|
 |**`backgroundColorBehindBorder`**|If you use border in style you have to set background behide(to force Android work).| string |*'white'*|
 
