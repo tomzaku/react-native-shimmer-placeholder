@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { PureComponent, Component } from 'react';
-import { View, Text, StyleSheet, Animated, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Animated, Image, ScrollView, FlatList} from 'react-native';
 
 import ShimmerPlaceHolder from './ShimmerPlaceholder.js';
 
@@ -267,8 +267,25 @@ export default class Shimmer extends Component {
             </ShimmerPlaceHolder>
           </View>
         </View>
+        <View>
+          <FlatList
+            data={new Array(45)}
+            renderItem={this.renderItem}
+            keyExtractor={this.keyExtractor}
+            contentContainerStyle={{alignItems: 'center',}}
+          />
+          
+        </View>
       </ScrollView>
     );
+  }
+  keyExtractor = (item, index) => {
+    return `${index}`
+  }
+  renderItem = () => {
+    return (
+      <ShimmerPlaceHolder autoRun style={{marginVertical: 7}} height={30} width={300} />
+    )
   }
 }
 

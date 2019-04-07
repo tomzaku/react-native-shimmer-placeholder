@@ -1,18 +1,25 @@
+
 <h2 align="center">
   React Native Shimmer Placeholder
 </h2>
+<p align="center">
+  <a href="https://www.npmjs.com/package/react-native-shimmer-placeholder"><img src="https://img.shields.io/npm/v/react-native-shimmer-placeholder.svg?style=flat-square"></a>
+  <a href="https://www.npmjs.com/package/react-native-shimmer-placeholder"><img src="https://img.shields.io/npm/dm/react-native-shimmer-placeholder.svg?style=flat-square"></a>
+  <a href="https://packagephobia.now.sh/badge?p=react-native-shimmer-placeholder@1.0.29"><img src="https://packagephobia.now.sh/badge?p=react-native-shimmer-placeholder@1.0.29"></a>
+</p>
 <h5 align="center">
 Placeholder for both IOS and Android
 </h5>
-<p align="center">
+
+<p align="center">`
 <img src="https://github.com/tomzaku/react-native-shimmer-placeholder/blob/master/example.gif?raw=true">
-</p>
-<p align="center">
+</p>`
+<!-- <p align="center">
 <img src="https://github.com/tomzaku/react-native-shimmer-placeholder/blob/master/example2.gif?raw=true">
-</p>
+</p> -->
 
 ## Get Started
-
+![install size](https://packagephobia.now.sh/badge?p=react-native-shimmer-placeholder@1.0.29)
 ### Installation
 
 ##### Step 1: Install react-native-linear-gradient (dependence)
@@ -24,7 +31,7 @@ or
 `yarn add react-native-linear-gradient && react-native link react-native-linear-gradient`
 
 
-##### Step 2: Install this package 
+##### Step 2: Install this package
 `npm i react-native-shimmer-placeholder --save`
 
 or
@@ -36,7 +43,7 @@ That's all!
 
 ### For who using [Expo](https://expo.io)
 
-Just install direct this package 
+Just install direct this package
 
 ```
 npm install https://github.com/tomzaku/react-native-shimmer-placeholder.git#expo --save
@@ -117,9 +124,10 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 |**`width`**|With of row| number |200|
 |**`duration`**|Duration of shimmer over a row| number |300|
 |**`height`**|height of row| number |15|
-|**`widthLine`**|percent of line placeholder| number |0.7|
+|**`widthShimmer`**|percent of line placeholder| number |1.0|
 |**`reverse`**|Reverse direction | boolean |`true`|
 |**`autoRun`**|Run shimmer animated at begin| boolean |`false`|
+|**`isInteraction`**|Defines whether or not the shimmer animation creates an interaction handle on the `InteractionManager`| boolean |`true`|
 |**`colorShimmer`**|Color of the shimmer.| string |*['#ebebeb', '#c5c5c5', '#ebebeb']*|
 |**`backgroundColorBehindBorder`**|If you use border in style you have to set background behide(to force Android work).| string |*'white'*|
 

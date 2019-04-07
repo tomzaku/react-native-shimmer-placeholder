@@ -1,0 +1,66 @@
+Arguments: 
+  /usr/local/Cellar/node/11.6.0/bin/node /usr/local/bin/yarn publish
+
+PATH: 
+  /Users/zaku/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin
+
+Yarn version: 
+  1.15.2
+
+Node version: 
+  11.6.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/-/user/org.couchdb.user:tomzaku: That email has already been registered.
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66058:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:129541:22)
+      at Request.emit (events.js:188:13)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130513:10)
+      at Request.emit (events.js:188:13)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:130435:12)
+      at Object.onceWrapper (events.js:276:13)
+      at IncomingMessage.emit (events.js:193:15)
+      at endReadableNT (_stream_readable.js:1129:12)
+      at process.internalTickCallback (internal/process/next_tick.js:72:19)
+
+npm manifest: 
+  {
+    "name": "react-native-shimmer-placeholder",
+    "version": "1.0.30",
+    "author": "Zaku",
+    "bugs": {
+      "url": "https://github.com/tomzaku/react-native-shimmer-placeholder/issues"
+    },
+    "directories": {
+      "example": "example"
+    },
+    "homepage": "https://github.com/tomzaku/react-native-shimmer-placeholder#readme",
+    "keywords": [
+      "loading",
+      "placeholder",
+      "react-native",
+      "shimmer"
+    ],
+    "license": "MIT",
+    "main": "./lib/ShimmerPlaceholder.js",
+    "peerDependencies": {
+      "prop-types": ">=15.6.0",
+      "react-native-linear-gradient": ">=2.4.0"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/tomzaku/react-native-shimmer-placeholder.git"
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
