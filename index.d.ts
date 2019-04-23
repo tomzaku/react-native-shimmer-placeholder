@@ -16,6 +16,6 @@ declare module 'react-native-shimmer-placeholder' {
         hasBorder?: boolean,
         isInteraction?: boolean,
     }
-    declare const MyComponent: React.SFC<Props>
+    declare class MyComponent extends React.Component<Props, any> {}
     export default MyComponent
 }
