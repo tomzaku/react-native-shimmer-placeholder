@@ -49,8 +49,7 @@ const ShimmerPlaceholder = (props) => {
     LinearGradient,
     children,
     animatedValue,
-    beginShimmerPosition,
-    shimmerWidthPercent = 1,
+    beginShimmerPosition
   } = props
 
   const linearTranslate = beginShimmerPosition.interpolate({
@@ -90,7 +89,7 @@ const ShimmerPlaceholder = (props) => {
               >
                 <LinearGradient
                   colors={shimmerColors}
-                  style={{ flex: 1, width: width * shimmerWidthPercent }}
+                  style={{ flex: 1, width: width }}
                   start={{
                     x: -1,
                     y: 0.5

@@ -20,18 +20,9 @@ Placeholder for both IOS and Android
 
 ## Get Started
 ![install size](https://packagephobia.now.sh/badge?p=react-native-shimmer-placeholder@1.0.29)
+
 ### Installation
 
-##### Step 1: Install react-native-linear-gradient (dependence)
-
-`npm i react-native-linear-gradient --save && react-native link react-native-linear-gradient`
-
-or
-
-`yarn add react-native-linear-gradient && react-native link react-native-linear-gradient`
-
-
-##### Step 2: Install this package
 `npm i react-native-shimmer-placeholder --save`
 
 or
@@ -41,23 +32,16 @@ or
 
 That's all!
 
-### For who using [Expo](https://expo.io)
-
-Just install direct this package
-
-```
-npm install https://github.com/tomzaku/react-native-shimmer-placeholder.git#expo --save
-```
-
-
 ### Usage
 
 #### Simple
 ``` js
-import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
+import { LinearGradient } from 'expo-linear-gradient';
+import { createShimmerPlaceholder } from './src/ShimmerPlaceholder'
+const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient)
 
-<ShimmerPlaceHolder autoRun={true} />
-<ShimmerPlaceHolder autoRun={true} visible={isFetched}>
+<ShimmerPlaceHolder />
+<ShimmerPlaceHolder visible={isFetched}>
   <Text>
     Wow, awesome here.
   </Text>
@@ -68,73 +52,76 @@ import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 #### Connect more components
 
 ``` js
-componentDidMount() {
-  this.runPlaceHolder();
-}
-runPlaceHolder() {
-  if (Array.isArray(this.loadingAnimated) && this.loadingAnimated.length > 0) {
-    Animated.parallel(
-      this.loadingAnimated.map(animate => {
-        if (animate&&animate.getAnimated) {
-          return animate.getAnimated();
-        }
-        return null;
-      }),
-      {
-        stopTogether: false,
-      }
-    ).start(() => {
-        this.runPlaceHolder();
-    })
-  }
-}
-_renderRows(loadingAnimated, numberRow, uniqueKey) {
-  let shimmerRows = [];
-  for(let index = 0; index < numberRow; index++ ){
-    shimmerRows.push(
-      <ShimmerPlaceHolder
-          key={`loading-${index}-${uniqueKey}`}
-          ref={(ref) => loadingAnimated.push(ref)}
-          style={{ marginBottom: 7 }}
-      />
-    )
-  }
+import { createShimmerPlaceholder } from './src/ShimmerPlaceholder'
+
+const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient)
+const FacebookContent = () => {
+
+  // Handle animation
+  const avatarRef = React.createRef()
+  const firstLineRef = React.createRef()
+  const secondLineRef = React.createRef()
+  const thirdLineRef = React.createRef()
+
+  React.useEffect(() => {
+    const facebookAnimated = Animated.stagger(400, [avatarRef.current.getAnimated(), Animated.parallel([
+      firstLineRef.current.getAnimated(),
+      secondLineRef.current.getAnimated(),
+      thirdLineRef.current.getAnimated()
+    ])])
+    Animated.loop(facebookAnimated).start();
+  }, [])
+
   return (
     <View>
-      {shimmerRows}
+      <View style={{ flexDirection: "row" }}>
+        <ShimmerPlaceholder
+          ref={avatarRef}
+          stopAutoRun
+        />
+        <View style={{ justifyContent: "space-between" }}>
+          <ShimmerPlaceholder
+            ref={firstLineRef}
+            stopAutoRun
+          />
+          <ShimmerPlaceholder
+            ref={secondLineRef}
+            stopAutoRun
+          />
+          <ShimmerPlaceholder
+            ref={thirdLineRef}
+            stopAutoRun
+          />
+        </View>
+      </View>
     </View>
-  )
-}
-render() {
-  this.loadingAnimated = [];
-  return(
-    {this._renderRows(this.loadingAnimated, 3, '3rows')}
   )
 }
 ```
 
-More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placeholder/blob/master/example/shimmer.js)
+More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placeholder/blob/master/example/App.js)
 
 ### Props
 
-| Prop | Description | Type | Default |
-|---|---|---| ---|
-|**`visible`**| visible child components | boolean |false|
-|**`style`**|Styles applied to the container of Shimmer Placeholder| |`{backgroundColor: '#ebebeb',overflow: 'hidden'}`|
-|**`width`**|With of row| number |200|
-|**`duration`**|Duration of shimmer over a row| number |300|
-|**`height`**|height of row| number |15|
-|**`widthShimmer`**|percent of line placeholder| number |1.0|
-|**`reverse`**|Reverse direction | boolean |`true`|
-|**`autoRun`**|Run shimmer animated at begin| boolean |`false`|
-|**`isInteraction`**|Defines whether or not the shimmer animation creates an interaction handle on the `InteractionManager`| boolean |`true`|
-|**`colorShimmer`**|Color of the shimmer.| string |*['#ebebeb', '#c5c5c5', '#ebebeb']*|
-|**`backgroundColorBehindBorder`**|If you use border in style you have to set background behide(to force Android work).| string |*'white'*|
+| Prop                      | Description                                                                                            | Type     | Default                                           |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------- |
+| **`visible`**             | visible child components                                                                               | boolean  | false                                             |
+| **`style`**               | Container Style                                                                                        | Style    | `{backgroundColor: '#ebebeb',overflow: 'hidden'}` |
+| **`shimmerStyle`**        | Shimmer Style only                                                                                     | number[] | *[0.3, 0.5, 0.7]*                                 |
+| **`location`**            | Location of shimmer                                                                                    |          | `{backgroundColor: '#ebebeb',overflow: 'hidden'}` |
+| **`width`**               | With of row                                                                                            | number   | 200                                               |
+| **`duration`**            | Duration of shimmer over a row                                                                         | number   | 300                                               |
+| **`height`**              | height of row                                                                                          | number   | 15                                                |
+| **`shimmerWidthPercent`** | percent of line placeholder                                                                            | number   | 1.0                                               |
+| **`isReversed`**          | Reverse direction                                                                                      | boolean  | `true`                                            |
+| **`stopAutoRun`**         | Stop running shimmer animation at beginning                                                            | boolean  | `false`                                           |
+| **`isInteraction`**       | Defines whether or not the shimmer animation creates an interaction handle on the `InteractionManager` | boolean  | `true`                                            |
+| **`shimmerColors`**       | Color of the shimmer.                                                                                  | string[] | *['#ebebeb', '#c5c5c5', '#ebebeb']*               |
 
 ### Methods
-| Method | Description | Type
-|---|---| --- |
-|**`getAnimated`**|get Animated of Placeholder | Animated|
+| Method            | Description                 | Type     |
+| ----------------- | --------------------------- | -------- |
+| **`getAnimated`** | get Animated of Placeholder | Animated |
 
 ### Contribute
 
