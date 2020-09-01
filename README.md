@@ -30,14 +30,12 @@ or
 `yarn add react-native-shimmer-placeholder`
 
 
-That's all!
-
 ### Usage
 
 #### Simple
 ``` js
 import { LinearGradient } from 'expo-linear-gradient';
-import { createShimmerPlaceholder } from './src/ShimmerPlaceholder'
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient)
 
 <ShimmerPlaceHolder />
@@ -48,11 +46,20 @@ const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient)
 </ShimmerPlaceHolder>
 
 ```
+or
+``` js
+import { LinearGradient } from 'expo-linear-gradient';
+...
+<ShimmerPlaceHolder
+  LinearGradient={LinearGradient}
+/>
+
+```
 
 #### Connect more components
 
 ``` js
-import { createShimmerPlaceholder } from './src/ShimmerPlaceholder'
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
 
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient)
 const FacebookContent = () => {
@@ -105,18 +112,18 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 
 | Prop                      | Description                                                                                            | Type     | Default                                           |
 | ------------------------- | ------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------- |
-| **`visible`**             | visible child components                                                                               | boolean  | false                                             |
+| **`visible`**             | Visible child components                                                                               | boolean  | false                                             |
 | **`style`**               | Container Style                                                                                        | Style    | `{backgroundColor: '#ebebeb',overflow: 'hidden'}` |
 | **`shimmerStyle`**        | Shimmer Style only                                                                                     | number[] | *[0.3, 0.5, 0.7]*                                 |
-| **`location`**            | Location of shimmer                                                                                    |          | `{backgroundColor: '#ebebeb',overflow: 'hidden'}` |
-| **`width`**               | With of row                                                                                            | number   | 200                                               |
+| **`location`**            | Locations of shimmer                                                                                   |          | `{backgroundColor: '#ebebeb',overflow: 'hidden'}` |
+| **`width`**               | Width of row                                                                                           | number   | 200                                               |
 | **`duration`**            | Duration of shimmer over a row                                                                         | number   | 300                                               |
-| **`height`**              | height of row                                                                                          | number   | 15                                                |
-| **`shimmerWidthPercent`** | percent of line placeholder                                                                            | number   | 1.0                                               |
-| **`isReversed`**          | Reverse direction                                                                                      | boolean  | `true`                                            |
+| **`height`**              | Height of row                                                                                          | number   | 15                                                |
+| **`shimmerWidthPercent`** | Percent of shimmer width                                                                               | number   | 1.0                                               |
+| **`isReversed`**          | Reverse direction of animation                                                                         | boolean  | `true`                                            |
 | **`stopAutoRun`**         | Stop running shimmer animation at beginning                                                            | boolean  | `false`                                           |
 | **`isInteraction`**       | Defines whether or not the shimmer animation creates an interaction handle on the `InteractionManager` | boolean  | `true`                                            |
-| **`shimmerColors`**       | Color of the shimmer.                                                                                  | string[] | *['#ebebeb', '#c5c5c5', '#ebebeb']*               |
+| **`shimmerColors`**       | Colors of the shimmer.                                                                                 | string[] | *['#ebebeb', '#c5c5c5', '#ebebeb']*               |
 
 ### Methods
 | Method            | Description                 | Type     |
@@ -125,7 +132,7 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 
 ### Contribute
 
-Any help this module will be approciate!
+Welcome to help me build this awesome lib.
 
 ### License
 
