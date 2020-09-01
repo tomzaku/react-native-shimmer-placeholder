@@ -102,7 +102,7 @@ const ShimmerPlaceholder = (props) => {
                 />
               </Animated.View>
               {/* Force run children */}
-              <View style={{ width: 0, height: 0 }}>{children}</View>
+              <View style={{ width: 0, height: 0, opacity: 0 }}>{children}</View>
             </View>
           )
       }
