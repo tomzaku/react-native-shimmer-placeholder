@@ -71,11 +71,17 @@ const FacebookContent = () => {
   const thirdLineRef = React.createRef()
 
   React.useEffect(() => {
-    const facebookAnimated = Animated.stagger(400, [avatarRef.current.getAnimated(), Animated.parallel([
-      firstLineRef.current.getAnimated(),
-      secondLineRef.current.getAnimated(),
-      thirdLineRef.current.getAnimated()
-    ])])
+    const facebookAnimated = Animated.stagger(
+      400,
+      [
+        avatarRef.current.getAnimated(),
+        Animated.parallel([
+          firstLineRef.current.getAnimated(),
+          secondLineRef.current.getAnimated(),
+          thirdLineRef.current.getAnimated()
+        ])
+      ]
+    );
     Animated.loop(facebookAnimated).start();
   }, [])
 
