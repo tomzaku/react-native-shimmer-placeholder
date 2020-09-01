@@ -3,7 +3,7 @@ import { Animated, Platform, StyleSheet, View } from "react-native";
 
 const getOutputRange = (width, isReversed) => isReversed ? [width, -width] : [-width, width]
 
-class AnimatedRefShimmer extends PureComponent {
+class ShimmerPlaceholder extends PureComponent {
   state = {
     beginShimmerPosition: new Animated.Value(-1)
   }
@@ -21,18 +21,18 @@ class AnimatedRefShimmer extends PureComponent {
 
   render() {
     return (
-      <ShimmerPlaceholder {...this.props} animatedValue={this.animatedValue} beginShimmerPosition={this.state.beginShimmerPosition} />
+      <BaseShimmerPlaceholder {...this.props} animatedValue={this.animatedValue} beginShimmerPosition={this.state.beginShimmerPosition} />
     )
   }
 }
 
-AnimatedRefShimmer.defaultProps = {
+ShimmerPlaceholder.defaultProps = {
   delay: 0,
   duration: 1000,
   isInteraction: true
 }
 
-const ShimmerPlaceholder = (props) => {
+const BaseShimmerPlaceholder = (props) => {
   const {
     width = 200,
     height = 15,
@@ -117,6 +117,6 @@ const styles = StyleSheet.create({
 
 });
 
-export const createShimmerPlaceholder = (LinearGradient) => React.forwardRef((props, ref) => <AnimatedRefShimmer LinearGradient={LinearGradient} ref={ref} {...props} />)
+export const createShimmerPlaceholder = (LinearGradient) => React.forwardRef((props, ref) => <ShimmerPlaceholder LinearGradient={LinearGradient} ref={ref} {...props} />)
 
-export default AnimatedRefShimmer
+export default ShimmerPlaceholder
