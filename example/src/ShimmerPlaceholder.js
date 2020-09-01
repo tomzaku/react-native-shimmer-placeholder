@@ -21,7 +21,7 @@ class ShimmerPlaceholder extends PureComponent {
 
   render() {
     return (
-      <BaseShimmerPlaceholder {...this.props} animatedValue={this.animatedValue} beginShimmerPosition={this.state.beginShimmerPosition} />
+      <BasedShimmerPlaceholder {...this.props} animatedValue={this.animatedValue} beginShimmerPosition={this.state.beginShimmerPosition} />
     )
   }
 }
@@ -32,7 +32,7 @@ ShimmerPlaceholder.defaultProps = {
   isInteraction: true
 }
 
-const BaseShimmerPlaceholder = (props) => {
+const BasedShimmerPlaceholder = (props) => {
   const {
     width = 200,
     height = 15,
@@ -49,7 +49,8 @@ const BaseShimmerPlaceholder = (props) => {
     LinearGradient,
     children,
     animatedValue,
-    beginShimmerPosition
+    beginShimmerPosition,
+    shimmerWidthPercent = 1,
   } = props
 
   const linearTranslate = beginShimmerPosition.interpolate({
@@ -89,7 +90,7 @@ const BaseShimmerPlaceholder = (props) => {
               >
                 <LinearGradient
                   colors={shimmerColors}
-                  style={{ flex: 1, width: width }}
+                  style={{ flex: 1, width: width * shimmerWidthPercent }}
                   start={{
                     x: -1,
                     y: 0.5
