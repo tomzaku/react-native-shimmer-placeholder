@@ -2,6 +2,7 @@ declare module 'react-native-shimmer-placeholder' {
 
     import * as React from 'react';
     import { Animated } from 'react-native';
+
     export interface ShimmerPlaceholderProps {
         width?: number | string;
         height?: number | string;
@@ -18,8 +19,10 @@ declare module 'react-native-shimmer-placeholder' {
         isInteraction?: boolean;
         LinearGradient?: React.ComponentClass<any>;
     }
+
     export default class ShimmerPlaceholder extends React.Component<ShimmerPlaceholderProps, any> {
         getAnimated(): Animated.CompositeAnimation;
     }
-    export const createShimmerPlaceholder = (LinearGradient?: React.ComponentClass<any>) => React.ComponentClass<any>
+
+    export const createShimmerPlaceholder = (LinearGradient?: React.ComponentClass<any>) => React.ComponentClass<ShimmerPlaceholderProps>
 }
