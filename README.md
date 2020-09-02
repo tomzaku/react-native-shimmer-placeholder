@@ -35,7 +35,7 @@ or
 #### Simple
 
 For `expo`
-``` js
+``` jsx
 import ShimmerPlaceholder from 'react-native-shimmer-placeholder'
 
 <ShimmerPlaceHolder />
@@ -47,21 +47,23 @@ import ShimmerPlaceholder from 'react-native-shimmer-placeholder'
 
 ```
 For `react-native-linear-gradient`
-``` js
+``` jsx
 import LinearGradient from 'react-native-linear-gradient';
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
 
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient)
+
 ...
-<ShimmerPlaceHolder
-/>
+
+<ShimmerPlaceHolder />
 ```
 or
-```js
+```jsx
 import LinearGradient from 'react-native-linear-gradient';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 
 ...
+
 <ShimmerPlaceHolder
   LinearGradient={LinearGradient}
 />
@@ -69,7 +71,7 @@ import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 
 #### Connect more components
 
-``` js
+```jsx
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
 import LinearGradient from 'react-native-linear-gradient';
 
