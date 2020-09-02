@@ -71,6 +71,10 @@ import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 
 #### Connect more components
 
+<p align="center">
+<img src="https://github.com/tomzaku/react-native-shimmer-placeholder/blob/master/facebook-load-data.gif?raw=true">
+</p>
+
 ```jsx
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
 import LinearGradient from 'react-native-linear-gradient';
