@@ -18,7 +18,6 @@ declare module 'react-native-shimmer-placeholder' {
         shimmerStyle?: any;
         isInteraction?: boolean;
         LinearGradient?: React.ComponentClass<any>;
-        // ref?: any;
     }
 
     class ShimmerPlaceholder extends React.Component<ShimmerPlaceholderProps, any> {
