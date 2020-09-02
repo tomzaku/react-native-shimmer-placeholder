@@ -11,9 +11,9 @@
 Placeholder for both IOS and Android
 </h5>
 
-<p align="center">`
+<p align="center">
 <img src="https://github.com/tomzaku/react-native-shimmer-placeholder/blob/master/example.gif?raw=true">
-</p>`
+</p>
 <!-- <p align="center">
 <img src="https://github.com/tomzaku/react-native-shimmer-placeholder/blob/master/example2.gif?raw=true">
 </p> -->
