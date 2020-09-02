@@ -1,23 +1,25 @@
 declare module 'react-native-shimmer-placeholder' {
-    import React from 'react';
+
+    import * as React from 'react';
     import { Animated } from 'react-native';
-    interface Props {
+    export interface ShimmerPlaceholderProps {
         width?: number | string;
         height?: number | string;
-        widthShimmer?: number;
+        shimmerWidthPercent?: number;
         duration?: number;
         delay?: number;
-        colorShimmer?: string[];
-        reverse?: boolean;
-        autoRun?: boolean;
+        shimmerColors?: string[];
+        isReversed?: boolean;
+        stopAutoRun?: boolean;
         visible?: boolean;
         children?: any;
         style?: any;
-        backgroundColorBehindBorder?: string;
-        hasBorder?: boolean;
+        shimmerStyle?: any;
         isInteraction?: boolean;
+        LinearGradient?: React.ComponentClass<any>;
     }
-    export default class ShimmerPlaceHolder extends React.Component<Props, any> {
+    export default class ShimmerPlaceholder extends React.Component<ShimmerPlaceholderProps, any> {
         getAnimated(): Animated.CompositeAnimation;
     }
+    export const createShimmerPlaceholder = (LinearGradient?: React.ComponentClass<any>) => React.ComponentClass<any>
 }
