@@ -3,9 +3,7 @@
 import React, { PureComponent, Component } from 'react';
 import { View, Text, StyleSheet, Animated, Image, ScrollView, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Shimmer, { createShimmerPlaceholder } from './src/ShimmerPlaceholder'
-
-const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient)
+import ShimmerPlaceholder from './src/ShimmerPlaceholder'
 
 const FacebookContent = ({ isReversed, shimmerColors, hasData, hasBorder, randomWidth }) => {
   // Handle visible
