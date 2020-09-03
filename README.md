@@ -139,13 +139,14 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 | **`LinearGradient`**      | Linear Gradient components ('react-native-linear-gradient' or 'expo-linear-gradient')                  | Component | global.Expo.LinearGradient                        |
 | **`visible`**             | Visible child components                                                                               | boolean   | false                                             |
 | **`style`**               | Container Style                                                                                        | Style     | `{backgroundColor: '#ebebeb',overflow: 'hidden'}` |
-| **`shimmerStyle`**        | Shimmer Style only                                                                                     | number[]  | *[0.3, 0.5, 0.7]*                                 |
-| **`location`**            | Locations of shimmer                                                                                   |           | `{backgroundColor: '#ebebeb',overflow: 'hidden'}` |
+| **`shimmerStyle`**        | Shimmer Style only                                                                                     | Style     | {}                                                |
+| **`contentStyle`**        | Content Style when visible                                                                             | Style     | {}                                                |
+| **`location`**            | Locations of shimmer                                                                                   | number[]  | *[0.3, 0.5, 0.7]*                                 |
 | **`width`**               | Width of row                                                                                           | number    | 200                                               |
-| **`duration`**            | Duration of shimmer over a row                                                                         | number    | 300                                               |
+| **`duration`**            | Duration of shimmer over a row                                                                         | number    | 1000                                              |
 | **`height`**              | Height of row                                                                                          | number    | 15                                                |
 | **`shimmerWidthPercent`** | Percent of shimmer width                                                                               | number    | 1.0                                               |
-| **`isReversed`**          | Reverse direction of animation                                                                         | boolean   | `true`                                            |
+| **`isReversed`**          | Reverse direction of animation                                                                         | boolean   | `false`                                           |
 | **`stopAutoRun`**         | Stop running shimmer animation at beginning                                                            | boolean   | `false`                                           |
 | **`isInteraction`**       | Defines whether or not the shimmer animation creates an interaction handle on the `InteractionManager` | boolean   | `true`                                            |
 | **`shimmerColors`**       | Colors of the shimmer.                                                                                 | string[]  | *['#ebebeb', '#c5c5c5', '#ebebeb']*               |
@@ -154,6 +155,29 @@ More Detail see [this](https://github.com/tomzaku/react-native-shimmer-placehold
 | Method            | Description                 | Type     |
 | ----------------- | --------------------------- | -------- |
 | **`getAnimated`** | get Animated of Placeholder | Animated |
+
+### Helpers
+
+`createShimmerPlaceholder`
+
+```
+/**
+ * To create ShimmerPlaceholder by Linear Gradient. Only useful when you use 3rd party,
+ * For example: react-native-linear-gradient
+ * @param {Linear Gradient Component} LinearGradient - 'expo-linear-gradient' by default
+ *
+ * @example
+ *
+ * import LinearGradient from 'react-native-linear-gradient';
+ * import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
+ *
+ * const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient)
+ *
+ * ...
+ *
+ * <ShimmerPlaceHolder />
+ */
+ ```
 
 ### Contribute
 

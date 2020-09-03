@@ -44,6 +44,7 @@ const BasedShimmerPlaceholder = (props) => {
     visible,
     location = [0.3, 0.5, 0.7],
     style,
+    contentStyle,
     shimmerStyle,
     isInteraction = true,
     LinearGradient = global.Expo
@@ -82,32 +83,31 @@ const BasedShimmerPlaceholder = (props) => {
     <View
       style={[!visible && { height, width }, styles.container, !visible && shimmerStyle, style]}
     >
+      {/* Force render children to restrict rendering twice */}
+      <View style={[!visible && { width: 0, height: 0, opacity: 0 }, visible && contentStyle]}>{children}</View>
       {
-        visible
-          ? (children)
-          : (
-            <View style={{ flex: 1, backgroundColor: shimmerColors[0] }}>
-              <Animated.View
-                style={{ flex: 1, transform: [{ translateX: linearTranslate }] }}
-              >
-                <LinearGradient
-                  colors={shimmerColors}
-                  style={{ flex: 1, width: width * shimmerWidthPercent }}
-                  start={{
-                    x: -1,
-                    y: 0.5
-                  }}
-                  end={{
-                    x: 2,
-                    y: 0.5
-                  }}
-                  locations={location}
-                />
-              </Animated.View>
-              {/* Force run children */}
-              <View style={{ width: 0, height: 0, opacity: 0 }}>{children}</View>
-            </View>
-          )
+        !visible && (
+          <View style={{ flex: 1, backgroundColor: shimmerColors[0] }}>
+            <Animated.View
+              style={{ flex: 1, transform: [{ translateX: linearTranslate }] }}
+            >
+              <LinearGradient
+                colors={shimmerColors}
+                style={{ flex: 1, width: width * shimmerWidthPercent }}
+                start={{
+                  x: -1,
+                  y: 0.5
+                }}
+                end={{
+                  x: 2,
+                  y: 0.5
+                }}
+                locations={location}
+              />
+            </Animated.View>
+
+          </View>
+        )
       }
     </View>
   )
@@ -120,6 +120,22 @@ const styles = StyleSheet.create({
 
 });
 
+/**
+ * To create ShimmerPlaceholder by Linear Gradient. Only useful when you use 3rd party,
+ * For example: react-native-linear-gradient
+ * @param {Linear Gradient Component} LinearGradient - 'expo-linear-gradient' by default
+ *
+ * @example
+ *
+ * import LinearGradient from 'react-native-linear-gradient';
+ * import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
+ *
+ * const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient)
+ *
+ * ...
+ *
+ * <ShimmerPlaceHolder />
+ */
 export const createShimmerPlaceholder = (LinearGradient = global.Expo
   ? global.Expo.LinearGradient
   : View) => React.forwardRef((props, ref) => <ShimmerPlaceholder LinearGradient={LinearGradient} ref={ref} {...props} />)
