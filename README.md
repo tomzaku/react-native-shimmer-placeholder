@@ -51,7 +51,7 @@ const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient)
 
 or 
 
-```
+``` jsx
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 import LinearGradient from 'expo-linear-gradient';
 
