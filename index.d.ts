@@ -10,6 +10,7 @@ declare module 'react-native-shimmer-placeholder' {
         duration?: number;
         delay?: number;
         shimmerColors?: string[];
+        location?: number[];
         isReversed?: boolean;
         stopAutoRun?: boolean;
         visible?: boolean;
